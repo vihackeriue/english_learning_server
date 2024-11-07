@@ -1,6 +1,6 @@
 package com.example.english_learning_server.config;
 
-import com.example.english_learning_server.user.UserReponsitory;
+import com.example.english_learning_server.service.UserReponsitory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

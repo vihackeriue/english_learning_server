@@ -1,5 +1,6 @@
-package com.example.english_learning_server.user;
+package com.example.english_learning_server.service;
 
+import com.example.english_learning_server.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

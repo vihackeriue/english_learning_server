@@ -1,6 +1,6 @@
-package com.example.english_learning_server.token;
+package com.example.english_learning_server.entity;
 
-import com.example.english_learning_server.user.User;
+import com.example.english_learning_server.token.TokenType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,9 +18,14 @@ public class Token {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(nullable = false, unique = true)
     private String token;
+
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TokenType tokenType;
+
     private boolean expired;
     private boolean revoked;
 

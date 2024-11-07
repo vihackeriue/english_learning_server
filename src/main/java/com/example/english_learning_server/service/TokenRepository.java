@@ -1,5 +1,6 @@
-package com.example.english_learning_server.token;
+package com.example.english_learning_server.service;
 
+import com.example.english_learning_server.entity.Token;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

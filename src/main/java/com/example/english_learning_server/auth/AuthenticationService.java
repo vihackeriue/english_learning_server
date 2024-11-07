@@ -1,13 +1,13 @@
 package com.example.english_learning_server.auth;
 
 import com.example.english_learning_server.config.JwtService;
-import com.example.english_learning_server.token.TokenRepository;
+import com.example.english_learning_server.service.TokenRepository;
 import com.example.english_learning_server.token.TokenType;
-import com.example.english_learning_server.user.UserReponsitory;
+import com.example.english_learning_server.service.UserReponsitory;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.example.english_learning_server.token.Token;
+import com.example.english_learning_server.entity.Token;
 import com.example.english_learning_server.user.Role;
-import com.example.english_learning_server.user.User;
+import com.example.english_learning_server.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +30,7 @@ public class AuthenticationService {
 
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
-                .full_name(request.getFull_name())
+                .fullName(request.getFull_name())
                 .phone(request.getPhone())
                 .avatar(request.getAvatar())
                 .status(request.getStatus())
