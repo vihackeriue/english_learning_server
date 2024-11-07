@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -55,11 +57,12 @@ public class User implements UserDetails {
     @Column(name = "updated_date")
     private LocalDateTime updatedDate;
 
-    @Column(name = "created_by", length = 50)
-    private String createdBy;
+    @LastModifiedBy
+    @Column(name = "created_by", length = 50, updatable = false)
+    private String createdBy = "User";
 
     @Column(name = "updated_by", length = 50)
-    private String updatedBy;
+    private String updatedBy = "User";
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
