@@ -71,6 +71,9 @@ public class AuthenticationService {
                 .builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
+                .role(user.getRole()) // Thêm thông tin về vai trò
+                .id(user.getId()) // Thêm id user vào phản hồi
+                .fullName(user.getFullName())
                 .build();
     }
 
