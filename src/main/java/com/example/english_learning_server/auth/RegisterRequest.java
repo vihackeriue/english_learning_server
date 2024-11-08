@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -16,13 +17,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class RegisterRequest {
 
-    private String full_name;
+    private String fullName;
     private String email;
     private String password;
 
     private String phone;
 
-    private String avatar;
+    private MultipartFile avatar;
 
     private int status = 1;
 

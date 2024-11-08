@@ -1,6 +1,6 @@
 package com.example.english_learning_server.config;
 
-import com.example.english_learning_server.service.TokenRepository;
+import com.example.english_learning_server.reponsitory.TokenRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

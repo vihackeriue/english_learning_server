@@ -1,9 +1,10 @@
 package com.example.english_learning_server.auth;
 
 import com.example.english_learning_server.config.JwtService;
-import com.example.english_learning_server.service.TokenRepository;
+import com.example.english_learning_server.reponsitory.TokenRepository;
+import com.example.english_learning_server.reponsitory.uploadImageFile;
 import com.example.english_learning_server.token.TokenType;
-import com.example.english_learning_server.service.UserReponsitory;
+import com.example.english_learning_server.reponsitory.UserReponsitory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.example.english_learning_server.entity.Token;
 import com.example.english_learning_server.user.Role;
@@ -27,12 +28,23 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final uploadImageFile uploadImageService;
 
     public AuthenticationResponse register(RegisterRequest request) {
+        // Upload ảnh lên Cloudinary
+        String avatarUrl = null;
+        if (request.getAvatar() != null && !request.getAvatar().isEmpty()) {
+            try {
+                avatarUrl = uploadImageService.uploadImage(request.getAvatar());
+            } catch (IOException e) {
+                throw new RuntimeException("Upload avatar failed", e);
+            }
+        }
+
         var user = User.builder()
-                .fullName(request.getFull_name())
+                .fullName(request.getFullName())
                 .phone(request.getPhone())
-                .avatar(request.getAvatar())
+                .avatar(avatarUrl)
                 .status(request.getStatus())
                 .createDate(request.getCreateDate())
                 .updatedDate(request.getUpdatedDate())

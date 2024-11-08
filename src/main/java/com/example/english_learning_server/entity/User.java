@@ -2,6 +2,7 @@ package com.example.english_learning_server.entity;
 
 import com.example.english_learning_server.entity.Token;
 import com.example.english_learning_server.user.Role;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -69,6 +70,7 @@ public class User implements UserDetails {
     private Role role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Token> tokens;
 
     @Override
