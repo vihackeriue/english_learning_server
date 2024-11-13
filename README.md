@@ -61,3 +61,5 @@ This is a server-side API for an English learning application, built using Java 
 4. Run the application using your preferred IDE or via command line:
    ```bash
    ./mvnw spring-boot:run
+
+![App Screenshot](english_learning_server/b.png)
