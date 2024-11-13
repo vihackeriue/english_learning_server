@@ -22,11 +22,6 @@ public class VocabularyUser {
     private User user;
 
     @ManyToOne
-    @MapsId("topicId")
-    @JsonIgnore
-    private Topic topic;
-
-    @ManyToOne
     @MapsId("vocabId")
     @JsonIgnore
     private Vocabulary vocabulary;
@@ -38,10 +33,9 @@ public class VocabularyUser {
     public VocabularyUser() {
     }
 
-    public VocabularyUser(VocabularyUserId id, User user, Topic topic, Vocabulary vocabulary, String progress) {
+    public VocabularyUser(VocabularyUserId id, User user, Vocabulary vocabulary, String progress) {
         this.id = id;
         this.user = user;
-        this.topic = topic;
         this.vocabulary = vocabulary;
         this.progress = progress;
     }
@@ -60,14 +54,6 @@ public class VocabularyUser {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Topic getTopic() {
-        return topic;
-    }
-
-    public void setTopic(Topic topic) {
-        this.topic = topic;
     }
 
     public Vocabulary getVocabulary() {

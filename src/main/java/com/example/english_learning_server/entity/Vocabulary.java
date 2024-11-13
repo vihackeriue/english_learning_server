@@ -31,16 +31,12 @@ public class Vocabulary {
     @JsonIgnore
     private Lesson lesson;
 
-    @OneToMany(mappedBy = "vocabulary", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<VocabularyTopic> vocabularyTopics = new ArrayList<>();
-
     // Getters and setters
 
     public Vocabulary() {
     }
 
-    public Vocabulary(Integer vocabId, String word, String meaning, String description, String image, String audio, Lesson lesson, List<VocabularyTopic> vocabularyTopics) {
+    public Vocabulary(Integer vocabId, String word, String meaning, String description, String image, String audio, Lesson lesson) {
         this.vocabId = vocabId;
         this.word = word;
         this.meaning = meaning;
@@ -48,7 +44,6 @@ public class Vocabulary {
         this.image = image;
         this.audio = audio;
         this.lesson = lesson;
-        this.vocabularyTopics = vocabularyTopics;
     }
 
     public Integer getVocabId() {
@@ -107,11 +102,4 @@ public class Vocabulary {
         this.lesson = lesson;
     }
 
-    public List<VocabularyTopic> getVocabularyTopics() {
-        return vocabularyTopics;
-    }
-
-    public void setVocabularyTopics(List<VocabularyTopic> vocabularyTopics) {
-        this.vocabularyTopics = vocabularyTopics;
-    }
 }

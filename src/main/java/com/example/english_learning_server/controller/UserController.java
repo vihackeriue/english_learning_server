@@ -19,6 +19,7 @@ public class UserController {
     private final UserService userService;
 
     // Lấy tất cả người dùng
+    // http://localhost:8080/api/v1/auth/users
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
@@ -26,6 +27,7 @@ public class UserController {
     }
 
     // Lấy người dùng theo ID
+    // http://localhost:8080/api/v1/auth/users/
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Integer id) {
         return userService.getUserById(id)

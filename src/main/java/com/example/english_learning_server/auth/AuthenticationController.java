@@ -15,7 +15,7 @@ import java.io.IOException;
 public class AuthenticationController {
 
     private final AuthenticationService service;
-
+    // http://localhost:8080/api/v1/auth/register
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
             @RequestParam("fullName") String fullName,
@@ -33,6 +33,9 @@ public class AuthenticationController {
 
         return ResponseEntity.ok(service.register(request));
     }
+
+    // api login:
+    // http://localhost:8080/api/v1/auth/authenticate
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest request
@@ -40,6 +43,8 @@ public class AuthenticationController {
         return ResponseEntity.ok(service.authenticate(request));
     }
 
+    // api refresh token:
+    // http://localhost:8080/api/v1/auth/refresh-token
     @PostMapping("/refresh-token")
     public void refreshToken(
         HttpServletRequest request,
