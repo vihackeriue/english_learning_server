@@ -1,7 +1,7 @@
 package com.example.english_learning_server.entity;
 
-import com.example.english_learning_server.entity.ids.UserCourseId;
 import com.example.english_learning_server.user.Role;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,29 +14,36 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "UserCourse")
 public class UserCourse {
-    @EmbeddedId
-    private UserCourseId id = new UserCourseId();
 
+    // Thêm khóa chính mới (id)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    // Biến khóa userId và courseId thành các khóa phụ
     @ManyToOne
-    @MapsId("userId")
+    @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
 
     @ManyToOne
-    @MapsId("courseId")
+    @JoinColumn(name = "course_id")
+    @JsonIgnore
     private Course course;
 
     private Integer studentCode;
+
     @Enumerated(EnumType.STRING)
     private Role role;
+
     private Integer status;
 
-    // Getters and setters
+    // Constructors
 
     public UserCourse() {
     }
 
-    public UserCourse(UserCourseId id, User user, Course course, Integer studentCode, Role role, Integer status) {
+    public UserCourse(Long id, User user, Course course, Integer studentCode, Role role, Integer status) {
         this.id = id;
         this.user = user;
         this.course = course;
@@ -45,11 +52,11 @@ public class UserCourse {
         this.status = status;
     }
 
-    public UserCourseId getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UserCourseId id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
