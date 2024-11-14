@@ -52,6 +52,27 @@ This is a server-side API for an English learning application, built using Java 
 - **Show Course by ID**
   - `GET` [http://localhost:8080/api/v1/auth/courses/{id}](http://localhost:8080/api/v1/auth/courses/{id})
 
+### Lesson APIs
+- **Add Lesson**
+  - `POST` [http://localhost:8080/api/v1/auth/lessons](http://localhost:8080/api/v1/auth/lessons)
+
+- **Update Lesson**
+  - `PUT` [http://localhost:8080/api/v1/auth/lessons/{id}](http://localhost:8080/api/v1/auth/lessons/{id})
+
+- **Delete Lesson**
+  - `DELETE` [http://localhost:8080/api/v1/auth/lessons/{id}](http://localhost:8080/api/v1/auth/lessons/{id})
+
+- **Show Lesson List**
+  - `GET` [http://localhost:8080/api/v1/auth/lessons](http://localhost:8080/api/v1/auth/lessons)
+
+- **Show Lesson by ID**
+  - `GET` [http://localhost:8080/api/v1/auth/lessons/{id}](http://localhost:8080/api/v1/auth/lessons/{id})
+
+- **Show Lesson by courses id**
+  - `GET` [http://localhost:8080/api/v1/auth/lessons/course/{id}](http://localhost:8080/api/v1/auth/lessons/course/{id})
+
+- **Show Lesson by level**
+  - `GET` [http://localhost:8080/api/v1/auth/lessons/level/{level}](http://localhost:8080/api/v1/auth/lessons/level/{level})
 ---
 
 ## Installation and Setup
