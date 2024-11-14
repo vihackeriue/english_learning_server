@@ -31,6 +31,9 @@ public class Lesson {
     private Course course;
 
     @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL)
+    private List<UserLesson> userLessons = new ArrayList<>();
+
+    @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Vocabulary> vocabularies = new ArrayList<>();
 
@@ -40,13 +43,14 @@ public class Lesson {
     public Lesson() {
     }
 
-    public Lesson(Integer lessonId, String lessonName, String content, String attachments, String level, Course course, List<Vocabulary> vocabularies) {
+    public Lesson(Integer lessonId, String lessonName, String content, String attachments, String level, Course course, List<UserLesson> userLessons, List<Vocabulary> vocabularies) {
         this.lessonId = lessonId;
         this.lessonName = lessonName;
         this.content = content;
         this.attachments = attachments;
         this.level = level;
         this.course = course;
+        this.userLessons = userLessons;
         this.vocabularies = vocabularies;
     }
 
@@ -96,6 +100,14 @@ public class Lesson {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public List<UserLesson> getUserLessons() {
+        return userLessons;
+    }
+
+    public void setUserLessons(List<UserLesson> userLessons) {
+        this.userLessons = userLessons;
     }
 
     public List<Vocabulary> getVocabularies() {

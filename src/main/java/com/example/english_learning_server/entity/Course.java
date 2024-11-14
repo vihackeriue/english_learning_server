@@ -32,6 +32,9 @@ public class Course {
     private List<UserCourse> userCourses = new ArrayList<>();
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    private List<UserLesson> userLessons = new ArrayList<>();
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private List<Lesson> lessons = new ArrayList<>();
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
@@ -43,7 +46,7 @@ public class Course {
     public Course() {
     }
 
-    public Course(Integer courseId, String courseName, String courseCode, Long maxQuantity, Integer status, String image, List<UserCourse> userCourses, List<Lesson> lessons, List<Test> tests) {
+    public Course(Integer courseId, String courseName, String courseCode, Long maxQuantity, Integer status, String image, List<UserCourse> userCourses, List<UserLesson> userLessons, List<Lesson> lessons, List<Test> tests) {
         this.courseId = courseId;
         this.courseName = courseName;
         this.courseCode = courseCode;
@@ -51,6 +54,7 @@ public class Course {
         this.status = status;
         this.image = image;
         this.userCourses = userCourses;
+        this.userLessons = userLessons;
         this.lessons = lessons;
         this.tests = tests;
     }
@@ -109,6 +113,14 @@ public class Course {
 
     public void setUserCourses(List<UserCourse> userCourses) {
         this.userCourses = userCourses;
+    }
+
+    public List<UserLesson> getUserLessons() {
+        return userLessons;
+    }
+
+    public void setUserLessons(List<UserLesson> userLessons) {
+        this.userLessons = userLessons;
     }
 
     public List<Lesson> getLessons() {

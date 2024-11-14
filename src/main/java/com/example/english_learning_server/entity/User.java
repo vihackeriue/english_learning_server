@@ -80,6 +80,10 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserCourse> userCourses = new ArrayList<>();
 
+    // Thêm quan hệ với bảng UserLessons
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserLesson> userLessons = new ArrayList<>();
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));

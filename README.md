@@ -90,6 +90,19 @@ This is a server-side API for an English learning application, built using Java 
 - **Show UserCourse by user id**
   - `GET` [http://localhost:8080/api/v1/auth/userCourses/user/{id}](http://localhost:8080/api/v1/auth/userCourses/user/{id})
 
+### UserLesson APIs
+- **Add User Lesson**
+  - `POST` [http://localhost:8080/api/v1/auth/userLesson/startLesson?userId&courseId&lessonId](http://localhost:8080/api/v1/auth/userLesson/startLesson?userId&courseId&lessonId)
+
+- **Delete User Lesson**
+  - `DELETE` [http://localhost:8080/api/v1/auth/userLesson/{id}](http://localhost:8080/api/v1/auth/userLesson/{id})
+
+- **Show User Lesson**
+  - `GET` [http://localhost:8080/api/v1/auth/userLesson](http://localhost:8080/api/v1/auth/userLesson)
+
+- **Show User Lesson by user id**
+  - `GET` [http://localhost:8080/api/v1/auth/userLesson/{id}](http://localhost:8080/api/v1/auth/userLesson/{id})
+
 
 ---
 

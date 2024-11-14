@@ -1,6 +1,6 @@
 package com.example.english_learning_server.entity;
 
-import com.example.english_learning_server.entity.ids.UserLessonId;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -11,25 +11,24 @@ import lombok.Data;
 @JsonIgnoreProperties({"user", "course", "lesson"}) // Thêm annotation để tránh xuất ra vòng lặp
 public class UserLesson {
 
-    @EmbeddedId
-    private UserLessonId userLessonId = new UserLessonId();
+    // Thêm khóa chính mới (id)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
-    @MapsId("userId")
     @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties({"userLessons"}) // Không tuần tự hóa lại UserLessons của User để tránh vòng lặp
+    @JsonIgnore
     private User user;
 
     @ManyToOne
-    @MapsId("courseId")
     @JoinColumn(name = "course_id")
-    @JsonIgnoreProperties({"userLessons"}) // Không tuần tự hóa lại UserLessons của Course để tránh vòng lặp
+    @JsonIgnore
     private Course course;
 
     @ManyToOne
-    @MapsId("lessonId")
     @JoinColumn(name = "lesson_id")
-    @JsonIgnoreProperties({"userLessons"}) // Không tuần tự hóa lại UserLessons của Lesson để tránh vòng lặp
+    @JsonIgnore
     private Lesson lesson;
 
     @Column(name = "Progress")
@@ -41,60 +40,12 @@ public class UserLesson {
     public UserLesson() {
     }
 
-    public UserLesson(UserLessonId userLessonId, User user, Course course, Lesson lesson, String progress, Integer status) {
-        this.userLessonId = userLessonId;
+    public UserLesson(Long id, User user, Course course, Lesson lesson, String progress, Integer status) {
+        this.id = id;
         this.user = user;
         this.course = course;
         this.lesson = lesson;
         this.progress = progress;
-        this.status = status;
-    }
-
-    public UserLessonId getUserLessonId() {
-        return userLessonId;
-    }
-
-    public void setUserLessonId(UserLessonId userLessonId) {
-        this.userLessonId = userLessonId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public Lesson getLesson() {
-        return lesson;
-    }
-
-    public void setLesson(Lesson lesson) {
-        this.lesson = lesson;
-    }
-
-    public String getProgress() {
-        return progress;
-    }
-
-    public void setProgress(String progress) {
-        this.progress = progress;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
         this.status = status;
     }
 }
