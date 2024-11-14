@@ -83,4 +83,5 @@ This is a server-side API for an English learning application, built using Java 
    ```bash
    ./mvnw spring-boot:run
 
-![App Screenshot](english_learning_server/b.png)
+![Alt text](b.png)
+
