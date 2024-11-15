@@ -34,7 +34,6 @@ public class Lesson {
     private List<UserLesson> userLessons = new ArrayList<>();
 
     @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Vocabulary> vocabularies = new ArrayList<>();
 
     // Getters and setters

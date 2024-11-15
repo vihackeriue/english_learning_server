@@ -31,6 +31,7 @@ public class Vocabulary {
     @JsonIgnore
     private Lesson lesson;
 
+
     // Getters and setters
 
     public Vocabulary() {
