@@ -1,6 +1,5 @@
 package com.example.english_learning_server.entity;
 
-import com.example.english_learning_server.entity.ids.VocabularyUserId;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,38 +12,44 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "VocabularyUser")
 public class VocabularyUser {
-    @EmbeddedId
-    private VocabularyUserId id = new VocabularyUserId();
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; // Khoá chính mới cho bảng VocabularyUser
 
     @ManyToOne
-    @MapsId("userId")
+    @JoinColumn(name = "userId") // Khoá ngoại
     @JsonIgnore
     private User user;
 
     @ManyToOne
-    @MapsId("vocabId")
+    @JoinColumn(name = "vocabId") // Khoá ngoại
     @JsonIgnore
     private Vocabulary vocabulary;
 
     private String progress;
 
-    // Getters and setters
-
+    // Constructor mặc định
     public VocabularyUser() {
     }
 
-    public VocabularyUser(VocabularyUserId id, User user, Vocabulary vocabulary, String progress) {
+    // Constructor có tham số
+
+    public VocabularyUser(Long id, User user, Vocabulary vocabulary, String progress) {
         this.id = id;
         this.user = user;
         this.vocabulary = vocabulary;
         this.progress = progress;
     }
 
-    public VocabularyUserId getId() {
+
+    // Getters và setters (lombok đã tự sinh ra các phương thức này)
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(VocabularyUserId id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

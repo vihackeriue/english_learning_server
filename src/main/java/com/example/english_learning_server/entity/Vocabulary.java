@@ -31,13 +31,17 @@ public class Vocabulary {
     @JsonIgnore
     private Lesson lesson;
 
+    // Thêm quan hệ với VocabularyUser
+    @OneToMany(mappedBy = "vocabulary", cascade = CascadeType.ALL)
+    private List<VocabularyUser> vocabularyUsers = new ArrayList<>();
+
 
     // Getters and setters
 
     public Vocabulary() {
     }
 
-    public Vocabulary(Integer vocabId, String word, String meaning, String description, String image, String audio, Lesson lesson) {
+    public Vocabulary(Integer vocabId, String word, String meaning, String description, String image, String audio, Lesson lesson, List<VocabularyUser> vocabularyUsers) {
         this.vocabId = vocabId;
         this.word = word;
         this.meaning = meaning;
@@ -45,6 +49,7 @@ public class Vocabulary {
         this.image = image;
         this.audio = audio;
         this.lesson = lesson;
+        this.vocabularyUsers = vocabularyUsers;
     }
 
     public Integer getVocabId() {
@@ -103,4 +108,11 @@ public class Vocabulary {
         this.lesson = lesson;
     }
 
+    public List<VocabularyUser> getVocabularyUsers() {
+        return vocabularyUsers;
+    }
+
+    public void setVocabularyUsers(List<VocabularyUser> vocabularyUsers) {
+        this.vocabularyUsers = vocabularyUsers;
+    }
 }

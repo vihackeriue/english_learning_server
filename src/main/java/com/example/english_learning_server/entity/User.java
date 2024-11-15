@@ -84,6 +84,10 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserLesson> userLessons = new ArrayList<>();
 
+    // Thêm quan hệ với VocabularyUser
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<VocabularyUser> vocabularyUsers;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
