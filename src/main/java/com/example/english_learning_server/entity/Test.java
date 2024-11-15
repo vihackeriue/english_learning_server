@@ -38,19 +38,21 @@ public class Test {
     private Course course;
 
     @OneToMany(mappedBy = "test", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<UserTest> userTests = new ArrayList<>();
 
     @OneToMany(mappedBy = "test", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Question> questions = new ArrayList<>();
 
+    @OneToMany(mappedBy = "test", cascade = CascadeType.ALL)
+    private List<UserAnswer> userAnswers = new ArrayList<>();
+
     // Getters and setters
 
     public Test() {
     }
 
-    public Test(Integer testId, String testName, String description, LocalTime examTime, LocalDate examDate, String type, String maxNumberOfExams, String level, String passingScore, Integer status, Course course, List<UserTest> userTests, List<Question> questions) {
+    public Test(Integer testId, String testName, String description, LocalTime examTime, LocalDate examDate, String type, String maxNumberOfExams, String level, String passingScore, Integer status, Course course, List<UserTest> userTests, List<Question> questions, List<UserAnswer> userAnswers) {
         this.testId = testId;
         this.testName = testName;
         this.description = description;
@@ -64,6 +66,7 @@ public class Test {
         this.course = course;
         this.userTests = userTests;
         this.questions = questions;
+        this.userAnswers = userAnswers;
     }
 
     public Integer getTestId() {
@@ -168,5 +171,13 @@ public class Test {
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+
+    public List<UserAnswer> getUserAnswers() {
+        return userAnswers;
+    }
+
+    public void setUserAnswers(List<UserAnswer> userAnswers) {
+        this.userAnswers = userAnswers;
     }
 }

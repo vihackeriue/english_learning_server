@@ -8,6 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.Id;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @Builder
 @Entity
@@ -26,18 +29,22 @@ public class AnswerOption {
     @JsonIgnore
     private Question question;
 
+    @OneToMany(mappedBy = "option", cascade = CascadeType.ALL)
+    private List<UserAnswer> userAnswers = new ArrayList<>();
+
     // Getters and setters
 
     public AnswerOption() {
 
     }
 
-    public AnswerOption(Integer answerId, String correctAnswer, String content, String attachments, Question question) {
+    public AnswerOption(Integer answerId, String correctAnswer, String content, String attachments, Question question, List<UserAnswer> userAnswers) {
         this.answerId = answerId;
         this.correctAnswer = correctAnswer;
         this.content = content;
         this.attachments = attachments;
         this.question = question;
+        this.userAnswers = userAnswers;
     }
 
     public Integer getAnswerId() {
@@ -78,5 +85,13 @@ public class AnswerOption {
 
     public void setQuestion(Question question) {
         this.question = question;
+    }
+
+    public List<UserAnswer> getUserAnswers() {
+        return userAnswers;
+    }
+
+    public void setUserAnswers(List<UserAnswer> userAnswers) {
+        this.userAnswers = userAnswers;
     }
 }

@@ -103,6 +103,44 @@ This is a server-side API for an English learning application, built using Java 
 - **Show User Lesson by user id**
   - `GET` [http://localhost:8080/api/v1/auth/userLesson/{id}](http://localhost:8080/api/v1/auth/userLesson/{id})
 
+### Vocabulary APIs
+- **Add Vocabulary**
+  - `POST` [http://localhost:8080/api/v1/auth/vocabularies](http://localhost:8080/api/v1/auth/vocabularies)
+
+- **Delete Vocabulary**
+  - `DELETE` [http://localhost:8080/api/v1/auth/vocabularies/{id}](http://localhost:8080/api/v1/auth/vocabularies/{id})
+
+- **Show Vocabulary**
+  - `GET` [http://localhost:8080/api/v1/auth/vocabularies](http://localhost:8080/api/v1/auth/vocabularies)
+
+- **Show Vocabulary by id**
+  - `GET` [http://localhost:8080/api/v1/auth/vocabularies/{id}](http://localhost:8080/api/v1/auth/vocabularies/{id})
+
+- **Show Vocabulary by word**
+  - `GET` [http://localhost:8080/api/v1/auth/vocabularies/word/{word}](http://localhost:8080/api/v1/auth/vocabularies/word/{word})
+
+- **Show Vocabulary by lesson id**
+  - `GET` [http://localhost:8080/api/v1/auth/vocabularies/lesson/{lessonId}](http://localhost:8080/api/v1/auth/vocabularies/lesson/{lessonid})
+
+- **Update vocabulary**
+  - `PUT` [http://localhost:8080/api/v1/auth/vocabularies/{id}](http://localhost:8080/api/v1/auth/vocabularies/{id})
+
+### VocabularyUser APIs
+- **Add VocabularyUser**
+  - `POST` [http://localhost:8080/api/v1/auth/vocabularyUser?userId={?}&vocabId={?}&progress={?}](http://localhost:8080/api/v1/auth/vocabularyUser?userId={?}&vocabId={?}&progress={?})
+
+- **Delete VocabularyUser**
+  - `DELETE` [http://localhost:8080/api/v1/auth/vocabularyUser/{id}](http://localhost:8080/api/v1/auth/vocabularyUser/{id})
+
+- **Show VocabularyUser**
+  - `GET` [http://localhost:8080/api/v1/auth/vocabularyUser/all](http://localhost:8080/api/v1/auth/vocabularyUser/all)
+
+- **Show VocabularyUser by id**
+  - `GET` [http://localhost:8080/api/v1/auth/vocabularyUser/{id}](http://localhost:8080/api/v1/auth/vocabularyUser/{id})
+
+- **Show VocabularyUser by user id**
+  - `GET` [http://localhost:8080/api/v1/auth/vocabularyUser/user/{userid}](http://localhost:8080/api/v1/auth/vocabularyUser/user/{userid})
+
 
 ---
 

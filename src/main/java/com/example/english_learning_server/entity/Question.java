@@ -34,12 +34,15 @@ public class Question {
     @JsonIgnore
     private List<AnswerOption> answerOptions = new ArrayList<>();
 
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    private List<UserAnswer> userAnswers = new ArrayList<>();
+
     // Getters and setters
 
     public Question() {
     }
 
-    public Question(Integer id, String content, String attachments, String type, String score, Test test, List<AnswerOption> answerOptions) {
+    public Question(Integer id, String content, String attachments, String type, String score, Test test, List<AnswerOption> answerOptions, List<UserAnswer> userAnswers) {
         this.id = id;
         this.content = content;
         this.attachments = attachments;
@@ -47,6 +50,7 @@ public class Question {
         this.score = score;
         this.test = test;
         this.answerOptions = answerOptions;
+        this.userAnswers = userAnswers;
     }
 
     public Integer getId() {
@@ -103,5 +107,13 @@ public class Question {
 
     public void setAnswerOptions(List<AnswerOption> answerOptions) {
         this.answerOptions = answerOptions;
+    }
+
+    public List<UserAnswer> getUserAnswers() {
+        return userAnswers;
+    }
+
+    public void setUserAnswers(List<UserAnswer> userAnswers) {
+        this.userAnswers = userAnswers;
     }
 }

@@ -1,6 +1,5 @@
 package com.example.english_learning_server.entity;
 
-import com.example.english_learning_server.entity.ids.UserAnswerId;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,38 +12,40 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "UserAnswer")
 public class UserAnswer {
-    @EmbeddedId
-    private UserAnswerId userAnswerId = new UserAnswerId();
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; // Khóa chính riêng biệt
 
     @ManyToOne
-    @MapsId("userId")
+    @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnore
-    private User user;
+    private User user; // Khóa phụ (foreign key)
 
     @ManyToOne
-    @MapsId("testId")
+    @JoinColumn(name = "test_id", nullable = false)
     @JsonIgnore
-    private Test test;
+    private Test test; // Khóa phụ (foreign key)
 
     @ManyToOne
-    @MapsId("questionId")
+    @JoinColumn(name = "question_id", nullable = false)
     @JsonIgnore
-    private Question question;
+    private Question question; // Khóa phụ (foreign key)
 
     @ManyToOne
-    @MapsId("optionId")
+    @JoinColumn(name = "option_id", nullable = false)
     @JsonIgnore
-    private AnswerOption option;
+    private AnswerOption option; // Khóa phụ (foreign key)
 
-    private String score;
+    private String score; // Thông tin thêm
 
     // Các constructor và phương thức getter/setter nếu cần
 
     public UserAnswer() {
     }
 
-    public UserAnswer(UserAnswerId userAnswerId, User user, Test test, Question question, AnswerOption option, String score) {
-        this.userAnswerId = userAnswerId;
+    public UserAnswer(Long id, User user, Test test, Question question, AnswerOption option, String score) {
+        this.id = id;
         this.user = user;
         this.test = test;
         this.question = question;
@@ -52,12 +53,12 @@ public class UserAnswer {
         this.score = score;
     }
 
-    public UserAnswerId getUserAnswerId() {
-        return userAnswerId;
+    public Long getId() {
+        return id;
     }
 
-    public void setUserAnswerId(UserAnswerId userAnswerId) {
-        this.userAnswerId = userAnswerId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public User getUser() {

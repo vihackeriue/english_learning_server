@@ -1,6 +1,5 @@
 package com.example.english_learning_server.entity;
 
-import com.example.english_learning_server.entity.ids.UserTestId;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,16 +14,19 @@ import java.time.LocalTime;
 @Entity
 @Table(name = "UserTest")
 public class UserTest {
-    @EmbeddedId
-    private UserTestId id = new UserTestId();
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
-    @MapsId("userId")
+    @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
 
     @ManyToOne
-    @MapsId("testId")
+    @JoinColumn(name = "test_id")
+    @JsonIgnore
     private Test test;
 
     private LocalTime examTimes;
@@ -32,13 +34,12 @@ public class UserTest {
     private String score;
     private String answerAttachments;
 
-    // Getters and setters
-
+    // Constructors, Getters, and Setters
 
     public UserTest() {
     }
 
-    public UserTest(UserTestId id, User user, Test test, LocalTime examTimes, Integer status, String score, String answerAttachments) {
+    public UserTest(Long id, User user, Test test, LocalTime examTimes, Integer status, String score, String answerAttachments) {
         this.id = id;
         this.user = user;
         this.test = test;
@@ -48,11 +49,11 @@ public class UserTest {
         this.answerAttachments = answerAttachments;
     }
 
-    public UserTestId getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UserTestId id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
