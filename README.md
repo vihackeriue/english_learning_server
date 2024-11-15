@@ -20,126 +20,263 @@ This is a server-side API for an English learning application, built using Java 
 - **Login**
   - `POST` [http://localhost:8080/api/v1/auth/authenticate](http://localhost:8080/api/v1/auth/authenticate)
 
+
+- **Example in Postman**
+  1. In the **Body** section, select `raw` and set the format to `JSON`.
+  2. Create the JSON body like this:
+     ```json
+     {
+       "email": "tranb@gmail.com",
+       "password": "123456"
+     }
+     ```
+
 - **Sign Up**
   - `POST` [http://localhost:8080/api/v1/auth/register](http://localhost:8080/api/v1/auth/register)
 
+
+- **Example in Postman**
+  1. In the **Body** section, select `form-data`.
+  2. Add the following key-value pairs in the **form-data**:
+     ```json
+       "Key": "Value"
+       "fullName":"Tran B"
+       "email": "tranb@gmail.com"
+       "password": "123456"
+       "phone":"0884563201"
+       "avatar":(type: file/text)"link image/url image"
+     ```
+
 - **Logout**
   - `POST` [http://localhost:8080/api/v1/auth/logout](http://localhost:8080/api/v1/auth/logout)
+  
+
+  - **Example in Postman**
+  1. In the **Authorization** , select `Bearer Token`.
+  2. Enter the access token from login into the box to log out.
 
 - **Refresh Token**
   - `POST` [http://localhost:8080/api/v1/auth/refresh-token](http://localhost:8080/api/v1/auth/refresh-token)
 
+
+  - **Example in Postman**
+  1. In the **Authorization** , select `Bearer Token`.
+  2. Enter the login access token into the box to refresh the token.
+  
+
 ### User APIs
 - **Get List of User Information**
-  - `GET` [http://localhost:8080/api/v1/auth/users](http://localhost:8080/api/v1/auth/users)
+  - `GET` [http://localhost:8080/api/v1/users](http://localhost:8080/api/v1/users)
 
 - **Get User Information by ID**
-  - `GET` [http://localhost:8080/api/v1/auth/users/{id}](http://localhost:8080/api/v1/auth/users/{id})
+  - `GET` [http://localhost:8080/api/v1/users/{id}](http://localhost:8080/api/v1/users/{id})
 
 ### Course APIs
 - **Add Course**
-  - `POST` [http://localhost:8080/api/v1/auth/courses](http://localhost:8080/api/v1/auth/courses)
+  - `POST` [http://localhost:8080/api/v1/courses](http://localhost:8080/api/v1/courses)
+
+  
+  - **Example in Postman**
+    1. In the **Body** section, select `raw` and set the format to `JSON`.
+    2. Create the JSON body like this:
+       ```json
+        {
+           "courseName": "test 3",
+           "courseCode": ".",
+           "maxQuantity": 40,
+           "status": 1,
+           "image": "https://example.com/image.png"
+        }
+       ```
 
 - **Update Course**
-  - `PUT` [http://localhost:8080/api/v1/auth/courses/{id}](http://localhost:8080/api/v1/auth/courses/{id})
+  - `PUT` [http://localhost:8080/api/v1/courses/{id}](http://localhost:8080/api/v1/courses/{id})
+
+
+  - **Example in Postman**
+    1. In the **Body** section, select `raw` and set the format to `JSON`.
+    2. Create the JSON body like this:
+    3. similar `post`
+
 
 - **Delete Course**
-  - `DELETE` [http://localhost:8080/api/v1/auth/courses/{id}](http://localhost:8080/api/v1/auth/courses/{id})
+  - `DELETE` [http://localhost:8080/api/v1/courses/{id}](http://localhost:8080/api/v1/courses/{id})
 
 - **Show Course List**
-  - `GET` [http://localhost:8080/api/v1/auth/courses](http://localhost:8080/api/v1/auth/courses)
+  - `GET` [http://localhost:8080/api/v1/courses](http://localhost:8080/api/v1/courses)
 
 - **Show Course by ID**
-  - `GET` [http://localhost:8080/api/v1/auth/courses/{id}](http://localhost:8080/api/v1/auth/courses/{id})
+  - `GET` [http://localhost:8080/api/v1/courses/{id}](http://localhost:8080/api/v1/courses/{id})
 
 ### Lesson APIs
 - **Add Lesson**
-  - `POST` [http://localhost:8080/api/v1/auth/lessons](http://localhost:8080/api/v1/auth/lessons)
+  - `POST` [http://localhost:8080/api/v1/lessons](http://localhost:8080/api/v1/lessons)
+
+
+- **Example in Postman**
+  1. In the **Body** section, select `raw` and set the format to `JSON`.
+  2. Create the JSON body like this:
+     ```json
+      {
+      "lessonName": "Lesson 3",
+      "content": "Lesson content",
+      "attachments": "attachment_link",
+      "level": "beginner",
+      "courseId": 1
+      }
+     ```
 
 - **Update Lesson**
-  - `PUT` [http://localhost:8080/api/v1/auth/lessons/{id}](http://localhost:8080/api/v1/auth/lessons/{id})
+  - `PUT` [http://localhost:8080/api/v1/lessons/{id}](http://localhost:8080/api/v1/lessons/{id})
+  
+
+  - **Example in Postman**
+    1. In the **Body** section, select `raw` and set the format to `JSON`.
+    2. Create the JSON body like this:
+    3. similar `post`
+
 
 - **Delete Lesson**
-  - `DELETE` [http://localhost:8080/api/v1/auth/lessons/{id}](http://localhost:8080/api/v1/auth/lessons/{id})
+  - `DELETE` [http://localhost:8080/api/v1/lessons/{id}](http://localhost:8080/api/v1/lessons/{id})
 
 - **Show Lesson List**
-  - `GET` [http://localhost:8080/api/v1/auth/lessons](http://localhost:8080/api/v1/auth/lessons)
+  - `GET` [http://localhost:8080/api/v1/lessons](http://localhost:8080/api/v1/lessons)
 
 - **Show Lesson by ID**
-  - `GET` [http://localhost:8080/api/v1/auth/lessons/{id}](http://localhost:8080/api/v1/auth/lessons/{id})
+  - `GET` [http://localhost:8080/api/v1/lessons/{id}](http://localhost:8080/api/v1/lessons/{id})
 
 - **Show Lesson by courses id**
-  - `GET` [http://localhost:8080/api/v1/auth/lessons/course/{id}](http://localhost:8080/api/v1/auth/lessons/course/{id})
+  - `GET` [http://localhost:8080/api/v1/lessons/course/{id}](http://localhost:8080/api/v1/lessons/course/{id})
 
 - **Show Lesson by level**
-  - `GET` [http://localhost:8080/api/v1/auth/lessons/level/{level}](http://localhost:8080/api/v1/auth/lessons/level/{level})
+  - `GET` [http://localhost:8080/api/v1/lessons/level/{level}](http://localhost:8080/api/v1/lessons/level/{level})
 
 ### UserCourse APIs
 - **Add UserCourse**
-  - `POST` [http://localhost:8080/api/v1/auth/userCourses/enroll?userId&courseId&studentCode&role&status](http://localhost:8080/api/v1/auth/userCourses/enroll?userId&courseId&studentCode&role&status)
+  - `POST` [http://localhost:8080/api/v1/userCourses/enroll?userId&courseId&studentCode&role&status](http://localhost:8080/api/v1/userCourses/enroll?userId&courseId&studentCode&role&status)
+
+
+- **Example in Postman**
+  1. In the **Body** section, select `form-data`.
+  2. Add the following key-value pairs in the **form-data**:
+     ```json
+      "Key": "Value"
+      "userId": 2
+      "courseId": 2
+      "studentCode": 1234
+      "role": "USER"
+      "status": 1
+     ```
+
 
 - **Delete UserCourse**
-  - `DELETE` [http://localhost:8080/api/v1/auth/lessons/{id}](http://localhost:8080/api/v1/auth/lessons/{id})
+  - `DELETE` [http://localhost:8080/api/v1/lessons/{id}](http://localhost:8080/api/v1/lessons/{id})
 
 - **Show Lesson UserCourse**
-  - `GET` [http://localhost:8080/api/v1/auth/userCourses](http://localhost:8080/api/v1/auth/userCourses)
+  - `GET` [http://localhost:8080/api/v1/userCourses](http://localhost:8080/api/v1/userCourses)
 
 - **Show UserCourse by ID**
-  - `GET` [http://localhost:8080/api/v1/auth/userCourses/{id}](http://localhost:8080/api/v1/auth/userCourses/{id})
+  - `GET` [http://localhost:8080/api/v1/userCourses/{id}](http://localhost:8080/api/v1/userCourses/{id})
 
 - **Show UserCourse by user id**
-  - `GET` [http://localhost:8080/api/v1/auth/userCourses/user/{id}](http://localhost:8080/api/v1/auth/userCourses/user/{id})
+  - `GET` [http://localhost:8080/api/v1/userCourses/user/{id}](http://localhost:8080/api/v1/userCourses/user/{id})
 
 ### UserLesson APIs
 - **Add User Lesson**
-  - `POST` [http://localhost:8080/api/v1/auth/userLesson/startLesson?userId&courseId&lessonId](http://localhost:8080/api/v1/auth/userLesson/startLesson?userId&courseId&lessonId)
+  - `POST` [http://localhost:8080/api/v1/userLesson/startLesson?userId&courseId&lessonId](http://localhost:8080/api/v1/userLesson/startLesson?userId&courseId&lessonId)
+
+
+- **Example in Postman**
+  1. In the **Body** section, select `form-data`.
+  2. Add the following key-value pairs in the **form-data**:
+     ```json
+      "Key": "Value"
+      "userId": 2
+      "courseId": 2
+      "lessonId": 1
+      "progress": "0%"
+     ```
+     
 
 - **Delete User Lesson**
-  - `DELETE` [http://localhost:8080/api/v1/auth/userLesson/{id}](http://localhost:8080/api/v1/auth/userLesson/{id})
+  - `DELETE` [http://localhost:8080/api/v1/userLesson/{id}](http://localhost:8080/api/v1/userLesson/{id})
 
 - **Show User Lesson**
-  - `GET` [http://localhost:8080/api/v1/auth/userLesson](http://localhost:8080/api/v1/auth/userLesson)
+  - `GET` [http://localhost:8080/api/v1/userLesson](http://localhost:8080/api/v1/userLesson)
 
 - **Show User Lesson by user id**
-  - `GET` [http://localhost:8080/api/v1/auth/userLesson/{id}](http://localhost:8080/api/v1/auth/userLesson/{id})
+  - `GET` [http://localhost:8080/api/v1/userLesson/{id}](http://localhost:8080/api/v1/userLesson/{id})
 
 ### Vocabulary APIs
 - **Add Vocabulary**
-  - `POST` [http://localhost:8080/api/v1/auth/vocabularies](http://localhost:8080/api/v1/auth/vocabularies)
+  - `POST` [http://localhost:8080/api/v1/vocabularies](http://localhost:8080/api/v1/vocabularies)
+
+- **Example in Postman**
+  1. In the **Body** section, select `raw` and set the format to `JSON`.
+  2. Create the JSON body like this:
+     ```json
+      {
+      "word": "banana",
+      "meaning": "A fruit that is typically green, and yellow.",
+      "description": "An banana is a sweet fruit from the banana tree, Malus domestica.",
+      "image": "http://example.com/images/banana.jpg",
+      "audio": "http://example.com/audio/banana.mp3",
+      "lessonId": 1
+      }
+     ```
 
 - **Delete Vocabulary**
-  - `DELETE` [http://localhost:8080/api/v1/auth/vocabularies/{id}](http://localhost:8080/api/v1/auth/vocabularies/{id})
+  - `DELETE` [http://localhost:8080/api/v1/vocabularies/{id}](http://localhost:8080/api/v1/vocabularies/{id})
 
 - **Show Vocabulary**
-  - `GET` [http://localhost:8080/api/v1/auth/vocabularies](http://localhost:8080/api/v1/auth/vocabularies)
+  - `GET` [http://localhost:8080/api/v1/vocabularies](http://localhost:8080/api/v1/vocabularies)
 
 - **Show Vocabulary by id**
-  - `GET` [http://localhost:8080/api/v1/auth/vocabularies/{id}](http://localhost:8080/api/v1/auth/vocabularies/{id})
+  - `GET` [http://localhost:8080/api/v1/vocabularies/{id}](http://localhost:8080/api/v1/vocabularies/{id})
 
 - **Show Vocabulary by word**
-  - `GET` [http://localhost:8080/api/v1/auth/vocabularies/word/{word}](http://localhost:8080/api/v1/auth/vocabularies/word/{word})
+  - `GET` [http://localhost:8080/api/v1/vocabularies/word/{word}](http://localhost:8080/api/v1/vocabularies/word/{word})
 
 - **Show Vocabulary by lesson id**
-  - `GET` [http://localhost:8080/api/v1/auth/vocabularies/lesson/{lessonId}](http://localhost:8080/api/v1/auth/vocabularies/lesson/{lessonid})
+  - `GET` [http://localhost:8080/api/v1/vocabularies/lesson/{lessonId}](http://localhost:8080/api/v1/vocabularies/lesson/{lessonid})
 
 - **Update vocabulary**
-  - `PUT` [http://localhost:8080/api/v1/auth/vocabularies/{id}](http://localhost:8080/api/v1/auth/vocabularies/{id})
+  - `PUT` [http://localhost:8080/api/v1/vocabularies/{id}](http://localhost:8080/api/v1/vocabularies/{id})
+
+
+- **Example in Postman**
+  1. In the **Body** section, select `raw` and set the format to `JSON`.
+  2. Create the JSON body like this:
+  3. similar `post`
+
 
 ### VocabularyUser APIs
 - **Add VocabularyUser**
-  - `POST` [http://localhost:8080/api/v1/auth/vocabularyUser?userId={?}&vocabId={?}&progress={?}](http://localhost:8080/api/v1/auth/vocabularyUser?userId={?}&vocabId={?}&progress={?})
+  - `POST` [http://localhost:8080/api/v1/vocabularyUser?userId={?}&vocabId={?}&progress={?}](http://localhost:8080/api/v1/vocabularyUser?userId={?}&vocabId={?}&progress={?})
+
+
+- **Example in Postman**
+  1. In the **Params** section, select `form-data`.
+  2. Add the following key-value pairs in the **Query params**:
+     ```json
+      "Key": "Value"
+      "userId": 2
+      "vocabId": 2
+      "progress": "ok"
+     ```
+
 
 - **Delete VocabularyUser**
-  - `DELETE` [http://localhost:8080/api/v1/auth/vocabularyUser/{id}](http://localhost:8080/api/v1/auth/vocabularyUser/{id})
+  - `DELETE` [http://localhost:8080/api/v1/vocabularyUser/{id}](http://localhost:8080/api/v1/vocabularyUser/{id})
 
 - **Show VocabularyUser**
-  - `GET` [http://localhost:8080/api/v1/auth/vocabularyUser/all](http://localhost:8080/api/v1/auth/vocabularyUser/all)
+  - `GET` [http://localhost:8080/api/v1/vocabularyUser/all](http://localhost:8080/api/v1/vocabularyUser/all)
 
 - **Show VocabularyUser by id**
-  - `GET` [http://localhost:8080/api/v1/auth/vocabularyUser/{id}](http://localhost:8080/api/v1/auth/vocabularyUser/{id})
+  - `GET` [http://localhost:8080/api/v1/vocabularyUser/{id}](http://localhost:8080/api/v1/vocabularyUser/{id})
 
 - **Show VocabularyUser by user id**
-  - `GET` [http://localhost:8080/api/v1/auth/vocabularyUser/user/{userid}](http://localhost:8080/api/v1/auth/vocabularyUser/user/{userid})
+  - `GET` [http://localhost:8080/api/v1/vocabularyUser/user/{userid}](http://localhost:8080/api/v1/vocabularyUser/user/{userid})
 
 
 ---
