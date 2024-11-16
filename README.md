@@ -71,6 +71,31 @@ This is a server-side API for an English learning application, built using Java 
 - **Get User Information by ID**
   - `GET` [http://localhost:8080/api/v1/users/{id}](http://localhost:8080/api/v1/users/{id})
 
+
+- **Get Current User**
+    - `GET` [http://localhost:8080/api/v1/users/me](http://localhost:8080/api/v1/users/me)
+  
+
+    - **Headers**
+    -  | Key            | Value             | Description                       |
+    -  |----------------|-------------------|-----------------------------------|
+    -  | Authorization  | Bearer {JWT}      | JWT access token from login       |
+
+    - **Response Example**
+      ```json
+      {
+        "id": 1,
+        "fullName": "John Doe",
+        "email": "johndoe@example.com",
+        "phone": "1234567890",
+        "avatar": null,
+        "status": 1,
+        "role": "USER",
+        "createDate": "2024-11-15T17:43:59.906+00:00",
+        "updatedDate": "2024-11-15T17:43:59.906+00:00"
+      }
+      ```
+
 ### Course APIs
 - **Add Course**
   - `POST` [http://localhost:8080/api/v1/courses](http://localhost:8080/api/v1/courses)
