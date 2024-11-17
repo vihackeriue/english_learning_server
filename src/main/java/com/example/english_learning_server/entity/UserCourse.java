@@ -28,7 +28,6 @@ public class UserCourse {
 
     @ManyToOne
     @JoinColumn(name = "course_id")
-    @JsonBackReference
     private Course course;
 
     private Integer studentCode;

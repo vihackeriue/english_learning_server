@@ -24,11 +24,10 @@ public class Course {
     private String courseName;
     private String courseCode;
     private Long maxQuantity;
-    private Integer status;
+    private Integer statusCourse;
     private String image;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<UserCourse> userCourses = new ArrayList<>();
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
@@ -46,12 +45,12 @@ public class Course {
     public Course() {
     }
 
-    public Course(Integer courseId, String courseName, String courseCode, Long maxQuantity, Integer status, String image, List<UserCourse> userCourses, List<UserLesson> userLessons, List<Lesson> lessons, List<Test> tests) {
+    public Course(Integer courseId, String courseName, String courseCode, Long maxQuantity, Integer statusCourse, String image, List<UserCourse> userCourses, List<UserLesson> userLessons, List<Lesson> lessons, List<Test> tests) {
         this.courseId = courseId;
         this.courseName = courseName;
         this.courseCode = courseCode;
         this.maxQuantity = maxQuantity;
-        this.status = status;
+        this.statusCourse = statusCourse;
         this.image = image;
         this.userCourses = userCourses;
         this.userLessons = userLessons;
@@ -91,12 +90,12 @@ public class Course {
         this.maxQuantity = maxQuantity;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getStatusCourse() {
+        return statusCourse;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setStatusCourse(Integer statusCourse) {
+        this.statusCourse = statusCourse;
     }
 
     public String getImage() {

@@ -109,7 +109,7 @@ This is a server-side API for an English learning application, built using Java 
            "courseName": "test 3",
            "courseCode": ".",
            "maxQuantity": 40,
-           "status": 1,
+           "statusCourse": 1,
            "image": "https://example.com/image.png"
         }
        ```
@@ -205,6 +205,47 @@ This is a server-side API for an English learning application, built using Java 
 
 - **Show UserCourse by user id**
   - `GET` [http://localhost:8080/api/v1/userCourses/user/{id}](http://localhost:8080/api/v1/userCourses/user/{id})
+
+
+- **Get Current userCourses**
+    - `GET` [http://localhost:8080/api/v1/userCourses/me](http://localhost:8080/api/v1/userCourses/me)
+
+
+    - **Headers**
+    -  | Key            | Value             | Description                       |
+    -  |----------------|-------------------|-----------------------------------|
+    -  | Authorization  | Bearer {JWT}      | JWT access token from login       |
+
+    - **Response Example**
+      ```json
+    [
+    {
+    "id": 2,
+    "studentCode": 123,
+    "role": "USER",
+    "status": 1,
+    "courseId": 1,
+    "courseName": "test 1",
+    "courseCode": ".",
+    "statusCourse": 1,
+    "maxQuantity": 40,
+    "image": "https://example.com/image.png"
+    },
+    {
+    "id": 4,
+    "studentCode": 124,
+    "role": "USER",
+    "status": 1,
+    "courseId": 2,
+    "courseName": "test 2",
+    "courseCode": ".",
+    "statusCourse": 1,
+    "maxQuantity": 40,
+    "image": "https://example.com/image.png"
+    }
+    ]
+      ```
+
 
 ### UserLesson APIs
 - **Add User Lesson**

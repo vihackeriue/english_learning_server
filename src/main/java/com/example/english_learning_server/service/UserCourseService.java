@@ -1,5 +1,7 @@
 package com.example.english_learning_server.service;
 
+import com.example.english_learning_server.converter.UserCourseMapper;
+import com.example.english_learning_server.dto.UserCourseDTO;
 import com.example.english_learning_server.entity.UserCourse;
 import com.example.english_learning_server.reponsitory.CourseRepository;
 import com.example.english_learning_server.reponsitory.UserCourseRepository;
@@ -8,9 +10,12 @@ import com.example.english_learning_server.entity.Course;
 import com.example.english_learning_server.entity.User;
 import com.example.english_learning_server.user.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserCourseService {
@@ -24,43 +29,70 @@ public class UserCourseService {
     @Autowired
     private CourseRepository courseRepository;
 
-    // Logic cho việc đăng ký khóa học
-    public UserCourse enrollInCourse(Integer userId, Integer courseId, Integer studentCode, Role role) {
-        // Kiểm tra sự tồn tại của người dùng và khóa học
+    @Autowired
+    private UserCourseMapper userCourseMapper;
+
+    public UserCourseDTO enrollInCourse(Integer userId, Integer courseId, Integer studentCode, Role role) {
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         Course course = courseRepository.findById(courseId).orElseThrow(() -> new RuntimeException("Course not found"));
 
-        // Tạo đối tượng UserCourse mới
         UserCourse userCourse = UserCourse.builder()
                 .user(user)
                 .course(course)
                 .studentCode(studentCode)
                 .role(role)
-                .status(1) // trạng thái mặc định là 1, có thể thay đổi tùy theo logic
+                .status(1)
                 .build();
 
-        // Lưu đối tượng UserCourse vào cơ sở dữ liệu
-        return userCourseRepository.save(userCourse);
+        UserCourse savedUserCourse = userCourseRepository.save(userCourse);
+
+        return userCourseMapper.toDto(savedUserCourse);  // Trả về DTO
     }
 
-    // Lấy tất cả UserCourses
-    public List<UserCourse> getAllUserCourses() {
-        return userCourseRepository.findAll();
+    public List<UserCourseDTO> getAllUserCourses() {
+        List<UserCourse> userCourses = userCourseRepository.findAll();
+        return userCourses.stream()
+                .map(userCourseMapper::toDto)
+                .collect(Collectors.toList());
     }
 
-    // Lấy UserCourse theo id
-    public UserCourse getUserCourseById(Long id) {
-        return userCourseRepository.findById(id).orElseThrow(() -> new RuntimeException("UserCourse not found"));
+    public UserCourseDTO getUserCourseById(Long id) {
+        UserCourse userCourse = userCourseRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("UserCourse not found"));
+        return userCourseMapper.toDto(userCourse);
     }
 
-    // Lấy danh sách UserCourses theo userId
-    public List<UserCourse> getUserCoursesByUserId(Integer userId) {
-        return userCourseRepository.findByUserId(userId);
+    public List<UserCourseDTO> getUserCoursesByUserId(Integer userId) {
+        List<UserCourse> userCourses = userCourseRepository.findByUserId(userId);
+        return userCourses.stream()
+                .map(userCourseMapper::toDto)
+                .collect(Collectors.toList());
     }
 
-    // Xóa UserCourse theo id
+    public List<UserCourseDTO> getUserCoursesForCurrentUser() {
+        // Lấy email của user từ SecurityContext
+        String userEmail = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            userEmail = ((UserDetails) principal).getUsername();
+        } else {
+            userEmail = principal.toString();
+        }
+
+        // Tìm user hiện tại
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // Lấy danh sách UserCourse của user và chuyển đổi sang DTO
+        List<UserCourse> userCourses = userCourseRepository.findByUserId(user.getId());
+        return userCourses.stream()
+                .map(userCourseMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
     public void deleteUserCourse(Long id) {
-        UserCourse userCourse = userCourseRepository.findById(id).orElseThrow(() -> new RuntimeException("UserCourse not found"));
+        UserCourse userCourse = userCourseRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("UserCourse not found"));
         userCourseRepository.delete(userCourse);
     }
 }

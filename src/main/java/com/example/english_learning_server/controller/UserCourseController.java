@@ -1,5 +1,6 @@
 package com.example.english_learning_server.controller;
 
+import com.example.english_learning_server.dto.UserCourseDTO;
 import com.example.english_learning_server.entity.UserCourse;
 import com.example.english_learning_server.service.UserCourseService;
 import com.example.english_learning_server.user.Role;
@@ -15,29 +16,36 @@ public class UserCourseController {
     @Autowired
     private UserCourseService userCourseService;
 
+    // Lấy UserCourses của user hiện tại
+    @GetMapping("/me")
+    public List<UserCourseDTO> getUserCoursesForCurrentUser() {
+        return userCourseService.getUserCoursesForCurrentUser();
+    }
+
+    // Đăng ký học khóa học
     @PostMapping("/enroll")
-    public UserCourse enrollInCourse(@RequestParam Integer userId,
-                                     @RequestParam Integer courseId,
-                                     @RequestParam Integer studentCode,
-                                     @RequestParam Role role) {
+    public UserCourseDTO enrollInCourse(@RequestParam Integer userId,
+                                        @RequestParam Integer courseId,
+                                        @RequestParam Integer studentCode,
+                                        @RequestParam Role role) {
         return userCourseService.enrollInCourse(userId, courseId, studentCode, role);
     }
 
     // Lấy tất cả UserCourses
     @GetMapping
-    public List<UserCourse> getAllUserCourses() {
+    public List<UserCourseDTO> getAllUserCourses() {
         return userCourseService.getAllUserCourses();
     }
 
     // Lấy UserCourse theo id
     @GetMapping("/{id}")
-    public UserCourse getUserCourseById(@PathVariable Long id) {
+    public UserCourseDTO getUserCourseById(@PathVariable Long id) {
         return userCourseService.getUserCourseById(id);
     }
 
     // Lấy danh sách UserCourses theo userId
     @GetMapping("/user/{userId}")
-    public List<UserCourse> getUserCoursesByUserId(@PathVariable Integer userId) {
+    public List<UserCourseDTO> getUserCoursesByUserId(@PathVariable Integer userId) {
         return userCourseService.getUserCoursesByUserId(userId);
     }
 

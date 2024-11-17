@@ -31,7 +31,7 @@ public class CourseService {
             course.setCourseName(courseDetails.getCourseName());
             course.setCourseCode(courseDetails.getCourseCode());
             course.setMaxQuantity(courseDetails.getMaxQuantity());
-            course.setStatus(courseDetails.getStatus());
+            course.setStatusCourse(courseDetails.getStatusCourse());
             course.setImage(courseDetails.getImage());
             return courseRepository.save(course);
         }).orElse(null);

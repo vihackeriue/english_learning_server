@@ -1,6 +1,8 @@
 package com.example.english_learning_server.controller;
 
 
+import com.example.english_learning_server.converter.CourseMapper;
+import com.example.english_learning_server.dto.CourseDTO;
 import com.example.english_learning_server.entity.Course;
 import com.example.english_learning_server.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,44 +20,33 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    // API thêm khóa học
-    // http://localhost:8080/api/v1/auth/courses
-    @PostMapping
-    public ResponseEntity<Course> addCourse(@RequestBody Course course) {
-        Course newCourse = courseService.addCourse(course);
-        return new ResponseEntity<>(newCourse, HttpStatus.CREATED);
-    }
-
-    // API hiển thị tất cả khóa học
-    // http://localhost:8080/api/v1/auth/courses
     @GetMapping
-    public ResponseEntity<List<Course>> getAllCourses() {
-        List<Course> courses = courseService.getAllCourses();
-        return new ResponseEntity<>(courses, HttpStatus.OK);
+    public ResponseEntity<List<CourseDTO>> getAllCourses() {
+        List<CourseDTO> courseDTOs = courseService.getAllCourses()
+                .stream()
+                .map(CourseMapper::toDTO)
+                .toList();
+        return new ResponseEntity<>(courseDTOs, HttpStatus.OK);
     }
 
-    // API hiển thị khóa học theo ID
-    // http://localhost:8080/api/v1/auth/courses/
     @GetMapping("/{id}")
-    public ResponseEntity<Course> getCourseById(@PathVariable Integer id) {
+    public ResponseEntity<CourseDTO> getCourseById(@PathVariable Integer id) {
         Optional<Course> course = courseService.getCourseById(id);
-        return course.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+        return course.map(value -> new ResponseEntity<>(CourseMapper.toDTO(value), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    // API sửa khóa học theo ID
-    // http://localhost:8080/api/v1/auth/courses/
-    @PutMapping("/{id}")
-    public ResponseEntity<Course> updateCourse(@PathVariable Integer id, @RequestBody Course courseDetails) {
-        Course updatedCourse = courseService.updateCourse(id, courseDetails);
-        return updatedCourse != null ? new ResponseEntity<>(updatedCourse, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @PostMapping
+    public ResponseEntity<CourseDTO> addCourse(@RequestBody Course course) {
+        Course newCourse = courseService.addCourse(course);
+        return new ResponseEntity<>(CourseMapper.toDTO(newCourse), HttpStatus.CREATED);
     }
 
-    // API xóa khóa học theo ID
-    // http://localhost:8080/api/v1/auth/courses/
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCourse(@PathVariable Integer id) {
-        boolean isDeleted = courseService.deleteCourse(id);
-        return isDeleted ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @PutMapping("/{id}")
+    public ResponseEntity<CourseDTO> updateCourse(@PathVariable Integer id, @RequestBody Course courseDetails) {
+        Course updatedCourse = courseService.updateCourse(id, courseDetails);
+        return updatedCourse != null
+                ? new ResponseEntity<>(CourseMapper.toDTO(updatedCourse), HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

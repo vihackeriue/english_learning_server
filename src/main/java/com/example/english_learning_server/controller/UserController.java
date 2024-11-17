@@ -1,5 +1,6 @@
 package com.example.english_learning_server.controller;
 
+import com.example.english_learning_server.dto.UserDTO;
 import com.example.english_learning_server.entity.User;
 import com.example.english_learning_server.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
@@ -19,26 +21,23 @@ public class UserController {
     private final UserService userService;
 
     // Lấy tất cả người dùng
-    // http://localhost:8080/api/v1/auth/users
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = userService.getAllUsers();
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        List<UserDTO> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
-    // Lấy người dùng theo ID
-    // http://localhost:8080/api/v1/auth/users/
+    // Lấy thông tin người dùng theo ID
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Integer id) {
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Integer id) {
         return userService.getUserById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-    // Lấy thông tin của user thông qua access-token:
+
+    // Lấy thông tin người dùng hiện tại
     @GetMapping("/me")
-    public ResponseEntity<User> getCurrentUser() {
+    public ResponseEntity<UserDTO> getCurrentUser() {
         return ResponseEntity.ok(userService.getCurrentUser());
     }
-
-
 }
