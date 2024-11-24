@@ -32,21 +32,39 @@ This is a server-side API for an English learning application, built using Java 
      ```
 
 - **Sign Up**
-  - `POST` [http://localhost:8080/api/v1/auth/register](http://localhost:8080/api/v1/auth/register)
+    - `POST` [http://localhost:8080/api/v1/auth/register](http://localhost:8080/api/v1/auth/register)
 
 
 - **Example in Postman**
     1. In the **Body** section, select `raw` and set the format to `JSON`.
     2. Create the JSON body like this:
+
+        - **Example 1 (with role)**:
        ```json
        {
-        "fullName":"vinh",
-        "email":"vinh@gmail.com",
-        "password":"123456",
-        "phone":"0123456789",
-        "avatar":"23cb8130-f55a-4bb6-b35f-49e0f8c038b2_Ahri_-29-scaled"
+         "fullName": "vinh",
+         "email": "vinh@gmail.com",
+         "password": "123456",
+         "phone": "0123456789",
+         "avatar": "23cb8130-f55a-4bb6-b35f-49e0f8c038b2_Ahri_-29-scaled",
+         "role": "TEACHER"
        }
        ```
+
+        - **Example 2 (without role, default role is USER)**:
+       ```json
+       {
+         "fullName": "vinh",
+         "email": "vinh@gmail.com",
+         "password": "123456",
+         "phone": "0123456789",
+         "avatar": "23cb8130-f55a-4bb6-b35f-49e0f8c038b2_Ahri_-29-scaled"
+       }
+       ```
+
+  In Example 1, the `role` is explicitly set to `TEACHER`.  
+  In Example 2, if the `role` is not provided in the request, it will default to `USER`.
+
 
 - **Logout**
   - `POST` [http://localhost:8080/api/v1/auth/logout](http://localhost:8080/api/v1/auth/logout)

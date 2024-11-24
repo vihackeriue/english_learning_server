@@ -1,5 +1,6 @@
 package com.example.english_learning_server.auth;
 
+import com.example.english_learning_server.user.Role;
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,4 +35,6 @@ public class RegisterRequest {
     private String createdBy;
 
     private String updatedBy;
+
+    private Role role;
 }

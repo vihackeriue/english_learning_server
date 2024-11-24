@@ -15,6 +15,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class AuthenticationController {
 
+    private final AuthenticationService authenticationService;
     private final AuthenticationService service;
     // http://localhost:8080/api/v1/auth/register
 //    @PostMapping("/register")
@@ -36,8 +37,10 @@ public class AuthenticationController {
 //    }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody User user) {
-        return ResponseEntity.ok(service.register(user));
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody User request) {
+        // Đăng ký người dùng và trả về phản hồi
+        AuthenticationResponse response = authenticationService.register(request);
+        return ResponseEntity.ok(response);
     }
 
 

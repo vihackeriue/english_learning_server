@@ -32,6 +32,19 @@ public class AuthenticationService {
         // Avatar URL được lấy trực tiếp từ request
         String avatarUrl = request.getAvatar();
 
+        // Nếu role là null, mặc định gán là USER
+        if (request.getRole() == null) {
+            request.setRole(Role.USER);
+        }
+
+        // Kiểm tra nếu role hợp lệ
+        try {
+            Role role = Role.valueOf(request.getRole().name());
+            request.setRole(role);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid role provided");
+        }
+
         var user = User.builder()
                 .fullName(request.getFullName())
                 .phone(request.getPhone())
@@ -43,7 +56,7 @@ public class AuthenticationService {
                 .updatedBy(request.getUpdatedBy())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.USER) // Mặc định vai trò là USER
+                .role(request.getRole()) // Đặt role người dùng theo yêu cầu
                 .build();
 
         var savedUser = reponsitory.save(user);
@@ -58,6 +71,7 @@ public class AuthenticationService {
                 .refreshToken(refreshToken)
                 .build();
     }
+
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
