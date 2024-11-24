@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/userCourses")
@@ -24,12 +25,15 @@ public class UserCourseController {
 
     // Đăng ký học khóa học
     @PostMapping("/enroll")
-    public UserCourseDTO enrollInCourse(@RequestParam Integer userId,
-                                        @RequestParam Integer courseId,
-                                        @RequestParam Integer studentCode,
-                                        @RequestParam Role role) {
+    public UserCourseDTO enrollInCourse(@RequestBody Map<String, Object> request) {
+        Integer userId = (Integer) request.get("userId");
+        Integer courseId = (Integer) request.get("courseId");
+        Integer studentCode = (Integer) request.get("studentCode");
+        Role role = Role.valueOf((String) request.get("role")); // Chuyển đổi string sang enum
+
         return userCourseService.enrollInCourse(userId, courseId, studentCode, role);
     }
+
 
     // Lấy tất cả UserCourses
     @GetMapping

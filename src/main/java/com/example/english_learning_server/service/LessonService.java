@@ -1,5 +1,7 @@
 package com.example.english_learning_server.service;
 
+import com.example.english_learning_server.converter.LessonMapper;
+import com.example.english_learning_server.dto.LessonDTO;
 import com.example.english_learning_server.entity.Course;
 import com.example.english_learning_server.entity.Lesson;
 import com.example.english_learning_server.reponsitory.LessonRepository;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 public class LessonService {
 
@@ -19,6 +22,9 @@ public class LessonService {
     @Autowired
     private CourseRepository courseRepository;
 
+    @Autowired
+    private LessonMapper lessonMapper;
+
     public List<Lesson> getAllLessons() {
         return lessonRepository.findAll();
     }
@@ -27,20 +33,19 @@ public class LessonService {
         return lessonRepository.findById(lessonId);
     }
 
-    public Lesson addLesson(Lesson lesson, Integer courseId) {
-        Course course = courseRepository.findById(courseId)
-                .orElseThrow(() -> new RuntimeException("Course not found with id: " + courseId));
-        lesson.setCourse(course);
+    public Lesson addLesson(LessonDTO lessonDTO) {
+        Course course = courseRepository.findById(lessonDTO.getCourseId())
+                .orElseThrow(() -> new RuntimeException("Course not found with id: " + lessonDTO.getCourseId()));
+        Lesson lesson = lessonMapper.toEntity(lessonDTO, course);
         return lessonRepository.save(lesson);
     }
 
-    public Lesson updateLesson(Integer lessonId, Lesson lessonDetails) {
+    public Lesson updateLesson(Integer lessonId, LessonDTO lessonDTO) {
         return lessonRepository.findById(lessonId).map(lesson -> {
-            lesson.setLessonName(lessonDetails.getLessonName());
-            lesson.setContent(lessonDetails.getContent());
-            lesson.setAttachments(lessonDetails.getAttachments());
-            lesson.setLevel(lessonDetails.getLevel());
-            lesson.setCourse(lessonDetails.getCourse());
+            Course course = courseRepository.findById(lessonDTO.getCourseId())
+                    .orElseThrow(() -> new RuntimeException("Course not found with id: " + lessonDTO.getCourseId()));
+            lesson = lessonMapper.toEntity(lessonDTO, course);
+            lesson.setLessonId(lessonId);
             return lessonRepository.save(lesson);
         }).orElse(null);
     }

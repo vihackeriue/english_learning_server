@@ -1,6 +1,8 @@
 package com.example.english_learning_server.controller;
 
+import com.example.english_learning_server.dto.VocabularyDTO;
 import com.example.english_learning_server.entity.Vocabulary;
+import com.example.english_learning_server.converter.VocabularyMapper;
 import com.example.english_learning_server.service.VocabularyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/vocabularies")
@@ -17,11 +20,12 @@ public class VocabularyController {
     @Autowired
     private VocabularyService vocabularyService;
 
-    // API thêm Vocabulary
+    @Autowired
+    private VocabularyMapper vocabularyMapper;
 
-    // API thêm Vocabulary với Map<String, Object>
+    // API thêm Vocabulary
     @PostMapping
-    public ResponseEntity<Vocabulary> addVocabulary(@RequestBody Map<String, Object> vocabularyData) {
+    public ResponseEntity<VocabularyDTO> addVocabulary(@RequestBody Map<String, Object> vocabularyData) {
         // Lấy lessonId và các thuộc tính của Vocabulary từ map
         Integer lessonId = (Integer) vocabularyData.get("lessonId");
         String word = (String) vocabularyData.get("word");
@@ -40,45 +44,62 @@ public class VocabularyController {
 
         // Thêm Vocabulary vào lesson tương ứng
         Vocabulary newVocabulary = vocabularyService.addVocabularyToLesson(vocabulary, lessonId);
-        return new ResponseEntity<>(newVocabulary, HttpStatus.CREATED);
-    }
 
+        // Chuyển đổi từ Entity sang DTO và trả về
+        VocabularyDTO vocabularyDTO = vocabularyMapper.toDTO(newVocabulary);
+        return new ResponseEntity<>(vocabularyDTO, HttpStatus.CREATED);
+    }
 
     // API hiển thị danh sách tất cả Vocabulary
     @GetMapping
-    public ResponseEntity<List<Vocabulary>> getAllVocabularies() {
+    public ResponseEntity<List<VocabularyDTO>> getAllVocabularies() {
         List<Vocabulary> vocabularies = vocabularyService.getAllVocabularies();
-        return ResponseEntity.ok(vocabularies);
+        List<VocabularyDTO> vocabularyDTOs = vocabularies.stream()
+                .map(vocabularyMapper::toDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(vocabularyDTOs);
     }
 
     // API hiển thị Vocabulary theo vocabId
     @GetMapping("/{vocabId}")
-    public ResponseEntity<Vocabulary> getVocabularyById(@PathVariable Integer vocabId) {
+    public ResponseEntity<VocabularyDTO> getVocabularyById(@PathVariable Integer vocabId) {
         Vocabulary vocabulary = vocabularyService.getVocabularyById(vocabId);
-        return ResponseEntity.ok(vocabulary);
+        VocabularyDTO vocabularyDTO = vocabularyMapper.toDTO(vocabulary);
+        return ResponseEntity.ok(vocabularyDTO);
     }
 
     // API hiển thị Vocabulary theo word
     @GetMapping("/word/{word}")
-    public ResponseEntity<Vocabulary> getVocabularyByWord(@PathVariable String word) {
+    public ResponseEntity<VocabularyDTO> getVocabularyByWord(@PathVariable String word) {
         Vocabulary vocabulary = vocabularyService.getVocabularyByWord(word);
-        return ResponseEntity.ok(vocabulary);
+        VocabularyDTO vocabularyDTO = vocabularyMapper.toDTO(vocabulary);
+        return ResponseEntity.ok(vocabularyDTO);
     }
 
     // API hiển thị Vocabulary theo lesson_id
     @GetMapping("/lesson/{lessonId}")
-    public ResponseEntity<List<Vocabulary>> getVocabulariesByLessonId(@PathVariable Integer lessonId) {
+    public ResponseEntity<List<VocabularyDTO>> getVocabulariesByLessonId(@PathVariable Integer lessonId) {
         List<Vocabulary> vocabularies = vocabularyService.getVocabulariesByLessonId(lessonId);
-        return ResponseEntity.ok(vocabularies);
+        List<VocabularyDTO> vocabularyDTOs = vocabularies.stream()
+                .map(vocabularyMapper::toDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(vocabularyDTOs);
     }
 
     // API cập nhật Vocabulary theo ID
     @PutMapping("/{vocabId}")
-    public ResponseEntity<Vocabulary> updateVocabulary(
+    public ResponseEntity<VocabularyDTO> updateVocabulary(
             @PathVariable Integer vocabId,
-            @RequestBody Vocabulary updatedVocabulary) {
-        Vocabulary vocabulary = vocabularyService.updateVocabulary(vocabId, updatedVocabulary);
-        return ResponseEntity.ok(vocabulary);
+            @RequestBody VocabularyDTO updatedVocabularyDTO) {
+        // Chuyển đổi DTO sang Entity
+        Vocabulary updatedVocabulary = vocabularyMapper.toEntity(updatedVocabularyDTO);
+
+        // Cập nhật Vocabulary
+        Vocabulary updatedEntity = vocabularyService.updateVocabulary(vocabId, updatedVocabulary);
+
+        // Chuyển Entity sang DTO và trả về
+        VocabularyDTO vocabularyDTO = vocabularyMapper.toDTO(updatedEntity);
+        return ResponseEntity.ok(vocabularyDTO);
     }
 
     // API xóa Vocabulary theo ID

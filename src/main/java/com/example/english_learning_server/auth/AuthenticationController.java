@@ -1,5 +1,6 @@
 package com.example.english_learning_server.auth;
 
+import com.example.english_learning_server.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -16,23 +17,29 @@ public class AuthenticationController {
 
     private final AuthenticationService service;
     // http://localhost:8080/api/v1/auth/register
+//    @PostMapping("/register")
+//    public ResponseEntity<AuthenticationResponse> register(
+//            @RequestParam("fullName") String fullName,
+//            @RequestParam("email") String email,
+//            @RequestParam("password") String password,
+//            @RequestParam("phone") String phone,
+//            @RequestParam(value = "avatar", required = false) MultipartFile avatar) {
+//
+//        RegisterRequest request = new RegisterRequest();
+//        request.setFullName(fullName);
+//        request.setEmail(email);
+//        request.setPassword(password);
+//        request.setPhone(phone);
+//        request.setAvatar(avatar);
+//
+//        return ResponseEntity.ok(service.register(request));
+//    }
+
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(
-            @RequestParam("fullName") String fullName,
-            @RequestParam("email") String email,
-            @RequestParam("password") String password,
-            @RequestParam("phone") String phone,
-            @RequestParam(value = "avatar", required = false) MultipartFile avatar) {
-
-        RegisterRequest request = new RegisterRequest();
-        request.setFullName(fullName);
-        request.setEmail(email);
-        request.setPassword(password);
-        request.setPhone(phone);
-        request.setAvatar(avatar);
-
-        return ResponseEntity.ok(service.register(request));
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody User user) {
+        return ResponseEntity.ok(service.register(user));
     }
+
 
     // api login:
     // http://localhost:8080/api/v1/auth/authenticate

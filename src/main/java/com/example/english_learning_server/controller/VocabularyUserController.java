@@ -1,6 +1,8 @@
 package com.example.english_learning_server.controller;
 
 import com.example.english_learning_server.entity.VocabularyUser;
+import com.example.english_learning_server.dto.VocabularyUserDTO;
+import com.example.english_learning_server.converter.VocabularyUserMapper;
 import com.example.english_learning_server.service.VocabularyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/vocabularyUser")
@@ -16,31 +19,42 @@ public class VocabularyUserController {
     @Autowired
     private VocabularyUserService vocabularyUserService;
 
+    @Autowired
+    private VocabularyUserMapper vocabularyUserMapper;
+
     @PostMapping
-    public VocabularyUser addVocabularyForUser(@RequestParam Integer userId,
-                                               @RequestParam Integer vocabId,
-                                               @RequestParam String progress) {
+    public VocabularyUser addVocabularyForUser(@RequestBody Map<String, Object> requestBody) {
+        Integer userId = (Integer) requestBody.get("userId");
+        Integer vocabId = (Integer) requestBody.get("vocabId");
+        String progress = (String) requestBody.get("progress");
+
         return vocabularyUserService.saveVocabularyForUser(userId, vocabId, progress);
     }
 
-    // Hiển thị tất cả VocabularyUser
+
     @GetMapping("/all")
-    public List<VocabularyUser> getAllVocabularyUsers() {
-        return vocabularyUserService.getAllVocabularyUsers();
+    public List<VocabularyUserDTO> getAllVocabularyUsers() {
+        List<VocabularyUser> vocabularyUsers = vocabularyUserService.getAllVocabularyUsers();
+        return vocabularyUsers.stream()
+                .map(vocabularyUserMapper::toDTO)
+                .toList();
     }
 
-    // Hiển thị VocabularyUser theo id
     @GetMapping("/{id}")
-    public VocabularyUser getVocabularyUserById(@PathVariable Long id) {
-        return vocabularyUserService.getVocabularyUserById(id);
+    public VocabularyUserDTO getVocabularyUserById(@PathVariable Long id) {
+        VocabularyUser vocabularyUser = vocabularyUserService.getVocabularyUserById(id);
+        return vocabularyUserMapper.toDTO(vocabularyUser);
     }
 
-    // Hiển thị VocabularyUser theo userId
-    @GetMapping("/user/{userId}")
-    public List<VocabularyUser> getVocabularyUsersByUserId(@PathVariable Integer userId) {
-        return vocabularyUserService.getVocabularyUsersByUserId(userId);
+    @GetMapping("/user")
+    public List<VocabularyUserDTO> getVocabularyUsersByToken(@RequestHeader("Authorization") String token) {
+        String accessToken = token.replace("Bearer ", "");
+        List<VocabularyUser> vocabularyUsers = vocabularyUserService.getVocabularyUsersByToken(accessToken);
+        return vocabularyUsers.stream()
+                .map(vocabularyUserMapper::toDTO)
+                .toList();
     }
-    // xoá vocabulary user
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteVocabularyUserById(@PathVariable Long id) {
         try {
@@ -50,5 +64,4 @@ public class VocabularyUserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("VocabularyUser not found");
         }
     }
-
 }

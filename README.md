@@ -36,16 +36,17 @@ This is a server-side API for an English learning application, built using Java 
 
 
 - **Example in Postman**
-  1. In the **Body** section, select `form-data`.
-  2. Add the following key-value pairs in the **form-data**:
-     ```json
-       "Key": "Value"
-       "fullName":"Tran B"
-       "email": "tranb@gmail.com"
-       "password": "123456"
-       "phone":"0884563201"
-       "avatar":(type: file/text)"link image/url image"
-     ```
+    1. In the **Body** section, select `raw` and set the format to `JSON`.
+    2. Create the JSON body like this:
+       ```json
+       {
+        "fullName":"vinh",
+        "email":"vinh@gmail.com",
+        "password":"123456",
+        "phone":"0123456789",
+        "avatar":"23cb8130-f55a-4bb6-b35f-49e0f8c038b2_Ahri_-29-scaled"
+       }
+       ```
 
 - **Logout**
   - `POST` [http://localhost:8080/api/v1/auth/logout](http://localhost:8080/api/v1/auth/logout)
@@ -182,16 +183,17 @@ This is a server-side API for an English learning application, built using Java 
 
 
 - **Example in Postman**
-  1. In the **Body** section, select `form-data`.
-  2. Add the following key-value pairs in the **form-data**:
-     ```json
-      "Key": "Value"
-      "userId": 2
-      "courseId": 2
-      "studentCode": 1234
-      "role": "USER"
-      "status": 1
-     ```
+    1. In the **Body** section, select `raw` and set the format to `JSON`.
+    2. Create the JSON body like this:
+       ```json
+        {
+        "userId":2,
+        "courseId":7,
+        "studentCode":1233,
+        "role":"USER",
+        "status":"1"
+        }
+       ```
 
 
 - **Delete UserCourse**
@@ -253,15 +255,15 @@ This is a server-side API for an English learning application, built using Java 
 
 
 - **Example in Postman**
-  1. In the **Body** section, select `form-data`.
-  2. Add the following key-value pairs in the **form-data**:
-     ```json
-      "Key": "Value"
-      "userId": 2
-      "courseId": 2
-      "lessonId": 1
-      "progress": "0%"
-     ```
+    1. In the **Body** section, select `raw` and set the format to `JSON`.
+    2. Create the JSON body like this:
+       ```json
+        {
+        "userId": 2,
+        "courseId": 2,
+        "lessonId": 3
+        }
+       ```
      
 
 - **Delete User Lesson**
@@ -272,6 +274,59 @@ This is a server-side API for an English learning application, built using Java 
 
 - **Show User Lesson by user id**
   - `GET` [http://localhost:8080/api/v1/userLesson/{id}](http://localhost:8080/api/v1/userLesson/{id})
+
+- **Get Current userLesson**
+    - `GET` [http://localhost:8080/api/v1/userLesson/me](http://localhost:8080/api/v1/userLesson/me)
+
+
+    - **Headers**
+    -  | Key            | Value             | Description                       |
+    -  |----------------|-------------------|-----------------------------------|
+    -  | Authorization  | Bearer {JWT}      | JWT access token from login       |
+
+    - **Response Example**
+      ```json
+    [
+    {
+    "lessonId": 1,
+    "lessonName": "Lesson 1",
+    "content": "Lesson content",
+    "attachments": "attachment_link",
+    "level": "beginner",
+    "courseId": 1,
+    "progress": "0%"
+    },
+    {
+    "lessonId": 1,
+    "lessonName": "Lesson 1",
+    "content": "Lesson content",
+    "attachments": "attachment_link",
+    "level": "beginner",
+    "courseId": 1,
+    "progress": "0%"
+    },
+    {
+    "lessonId": 1,
+    "lessonName": "Lesson 1",
+    "content": "Lesson content",
+    "attachments": "attachment_link",
+    "level": "beginner",
+    "courseId": 1,
+    "progress": "0%"
+    }
+    ]
+      ```
+- **Update userLesson Process**
+    - `PUT` [http://localhost:8080/api/v1/userLesson/{id}](http://localhost:8080/api/v1/userLesson/{id})
+- **Example in Postman**
+    1. In the **Body** section, select `raw` and set the format to `JSON`.
+    2. Create the JSON body like this:
+       ```json
+        {
+          "progress": 50.0
+        }
+       ```
+
 
 ### Vocabulary APIs
 - **Add Vocabulary**
@@ -322,14 +377,15 @@ This is a server-side API for an English learning application, built using Java 
 
 
 - **Example in Postman**
-  1. In the **Params** section, select `form-data`.
-  2. Add the following key-value pairs in the **Query params**:
-     ```json
-      "Key": "Value"
-      "userId": 2
-      "vocabId": 2
-      "progress": "ok"
-     ```
+    1. In the **Body** section, select `raw` and set the format to `JSON`.
+    2. Create the JSON body like this:
+       ```json
+        {
+        "userId": 1,
+        "vocabId": 1,
+        "progress": "learning"
+        }
+       ```
 
 
 - **Delete VocabularyUser**
@@ -341,9 +397,52 @@ This is a server-side API for an English learning application, built using Java 
 - **Show VocabularyUser by id**
   - `GET` [http://localhost:8080/api/v1/vocabularyUser/{id}](http://localhost:8080/api/v1/vocabularyUser/{id})
 
-- **Show VocabularyUser by user id**
-  - `GET` [http://localhost:8080/api/v1/vocabularyUser/user/{userid}](http://localhost:8080/api/v1/vocabularyUser/user/{userid})
+- **Get Current VocabularyUser**
+    - `GET` [http://localhost:8080/api/v1/vocabularyUser/user](http://localhost:8080/api/v1/vocabularyUser/user)
 
+
+    - **Headers**
+    -  | Key            | Value             | Description                       |
+    -  |----------------|-------------------|-----------------------------------|
+    -  | Authorization  | Bearer {JWT}      | JWT access token from login       |
+
+    - **Response Example**
+      ```json
+        [
+        {
+        "id": 1,
+        "userId": 1,
+        "vocabId": 1,
+        "progress": "ok",
+        "word": "strawbery",
+        "meaning": "A fruit that is typically white, and red."
+        },
+        {
+        "id": 2,
+        "userId": 1,
+        "vocabId": 1,
+        "progress": "ok",
+        "word": "strawbery",
+        "meaning": "A fruit that is typically white, and red."
+        },
+        {
+        "id": 4,
+        "userId": 1,
+        "vocabId": 1,
+        "progress": "ok",
+        "word": "strawbery",
+        "meaning": "A fruit that is typically white, and red."
+        },
+        {
+        "id": 5,
+        "userId": 1,
+        "vocabId": 1,
+        "progress": "learning",
+        "word": "strawbery",
+        "meaning": "A fruit that is typically white, and red."
+        }
+        ]
+        ```
 
 ---
 

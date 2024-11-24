@@ -32,7 +32,7 @@ public class UserLesson {
     private Lesson lesson;
 
     @Column(name = "Progress")
-    private String progress;
+    private double progress;
 
     @Column(name = "status")
     private Integer status;
@@ -40,12 +40,20 @@ public class UserLesson {
     public UserLesson() {
     }
 
-    public UserLesson(Long id, User user, Course course, Lesson lesson, String progress, Integer status) {
+    public UserLesson(Long id, User user, Course course, Lesson lesson, double progress, Integer status) {
         this.id = id;
         this.user = user;
         this.course = course;
         this.lesson = lesson;
         this.progress = progress;
         this.status = status;
+    }
+
+    public double getProgress() {
+        return progress;
+    }
+
+    public void setProgress(double progress) {
+        this.progress = progress;
     }
 }
