@@ -355,35 +355,35 @@ This is a server-side API for an English learning application, built using Java 
 
     - **Response Example**
       ```json
-    [
-    {
-    "lessonId": 1,
-    "lessonName": "Lesson 1",
-    "content": "Lesson content",
-    "attachments": "attachment_link",
-    "level": "beginner",
-    "courseId": 1,
-    "progress": "0%"
-    },
-    {
-    "lessonId": 1,
-    "lessonName": "Lesson 1",
-    "content": "Lesson content",
-    "attachments": "attachment_link",
-    "level": "beginner",
-    "courseId": 1,
-    "progress": "0%"
-    },
-    {
-    "lessonId": 1,
-    "lessonName": "Lesson 1",
-    "content": "Lesson content",
-    "attachments": "attachment_link",
-    "level": "beginner",
-    "courseId": 1,
-    "progress": "0%"
-    }
-    ]
+      [
+      {
+      "lessonId": 1,
+      "lessonName": "Lesson 1",
+      "content": "Lesson content",
+      "attachments": "attachment_link",
+      "level": "beginner",
+      "courseId": 1,
+      "progress": "0%"
+      },
+      {
+      "lessonId": 1,
+      "lessonName": "Lesson 1",
+      "content": "Lesson content",
+      "attachments": "attachment_link",
+      "level": "beginner",
+      "courseId": 1,
+      "progress": "0%"
+      },
+      {
+      "lessonId": 1,
+      "lessonName": "Lesson 1",
+      "content": "Lesson content",
+      "attachments": "attachment_link",
+      "level": "beginner",
+      "courseId": 1,
+      "progress": "0%"
+      }
+      ]
       ```
 - **Update userLesson Process**
     - `PUT` [http://localhost:8080/api/v1/userLesson/{id}](http://localhost:8080/api/v1/userLesson/{id})
