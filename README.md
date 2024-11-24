@@ -177,6 +177,57 @@ This is a server-side API for an English learning application, built using Java 
 - **Show Lesson by level**
   - `GET` [http://localhost:8080/api/v1/lessons/level/{level}](http://localhost:8080/api/v1/lessons/level/{level})
 
+- **Get lesson by access-token**
+    - `GET` [http://localhost:8080/api/v1/lessons/user](http://localhost:8080/api/v1/lessons/user)
+
+
+    - **Headers**
+    -  | Key            | Value             | Description                       |
+    -  |----------------|-------------------|-----------------------------------|
+    -  | Authorization  | Bearer {JWT}      | JWT access token from login       |
+
+    - **Response Example**
+      ```json
+        [
+            {
+                "lessonId": 1,
+                "lessonName": "Lesson 1",
+                "content": "Lesson content",
+                "attachments": "attachment_link",
+                "level": 1,
+                "courseId": 1,
+                "progress": 0.0
+                },
+            {
+                "lessonId": 4,
+                "lessonName": "Lesson 3",
+                "content": "Lesson content",
+                "attachments": "attachment_link",
+                "level": 1,
+                "courseId": 2,
+                "progress": 0.0
+            },
+            {
+                "lessonId": 2,
+                "lessonName": "Lesson 2",
+                "content": "Lesson content",
+                "attachments": "attachment_link",
+                "level": 2,
+                "courseId": 1,
+                "progress": 0.0
+            },
+            {
+                "lessonId": 3,
+                "lessonName": "Lesson 3",
+                "content": "Lesson content",
+                "attachments": "attachment_link",
+                "level": 3,
+                "courseId": 1,
+                "progress": 0.0
+            }
+        ]
+      ```
+
 ### UserCourse APIs
 - **Add UserCourse**
   - `POST` [http://localhost:8080/api/v1/userCourses/enroll?userId&courseId&studentCode&role&status](http://localhost:8080/api/v1/userCourses/enroll?userId&courseId&studentCode&role&status)

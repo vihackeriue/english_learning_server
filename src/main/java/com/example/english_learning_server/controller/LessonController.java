@@ -2,6 +2,7 @@ package com.example.english_learning_server.controller;
 
 import com.example.english_learning_server.dto.LessonDTO;
 import com.example.english_learning_server.converter.LessonMapper;
+import com.example.english_learning_server.dto.UserLessonDTO;
 import com.example.english_learning_server.service.LessonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -68,10 +69,17 @@ public class LessonController {
     }
 
     @GetMapping("/level/{level}")
-    public ResponseEntity<List<LessonDTO>> getLessonsByLevel(@PathVariable String level) {
+    public ResponseEntity<List<LessonDTO>> getLessonsByLevel(@PathVariable int level) {
         List<LessonDTO> lessons = lessonService.getLessonsByLevel(level).stream()
                 .map(lessonMapper::toDTO)
                 .collect(Collectors.toList());
         return new ResponseEntity<>(lessons, HttpStatus.OK);
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<List<UserLessonDTO>> getUserLessons(@RequestHeader("Authorization") String token) {
+        // Gọi phương thức từ LessonService để lấy danh sách bài học cho người dùng hiện tại
+        List<UserLessonDTO> userLessons = lessonService.getUserLessonsForCurrentUser();
+        return new ResponseEntity<>(userLessons, HttpStatus.OK);
     }
 }

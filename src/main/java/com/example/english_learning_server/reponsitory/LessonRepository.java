@@ -10,5 +10,6 @@ import java.util.List;
 @Repository
 public interface LessonRepository extends JpaRepository<Lesson, Integer> {
     List<Lesson> findByCourseCourseId(Integer courseId);
-    List<Lesson> findByLevel(String level);
+    List<Lesson> findByLevel(int level);
+
 }

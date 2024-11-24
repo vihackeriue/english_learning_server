@@ -55,9 +55,16 @@ public class UserLessonController {
     }
 
     // Lấy UserLessons của user hiện tại
-    @GetMapping("/me")
-    public List<UserLessonDTO> getUserLessonsForCurrentUser() {
-        return userLessonService.getUserLessonsForCurrentUser();
+//    @GetMapping("/me")
+//    public List<UserLessonDTO> getUserLessonsForCurrentUser() {
+//        return userLessonService.getUserLessonsForCurrentUser();
+//    }
+
+    // Lấy danh sách bài học của người dùng hiện tại
+    @GetMapping("/user")
+    public ResponseEntity<List<UserLessonDTO>> getUserLessonsForCurrentUser() {
+        List<UserLessonDTO> lessons = userLessonService.getUserLessonsForCurrentUser();
+        return ResponseEntity.ok(lessons);
     }
 
     // API xóa UserLesson theo id

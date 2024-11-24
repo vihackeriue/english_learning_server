@@ -8,6 +8,8 @@ public class LessonDTO {
     private String lessonName;
     private String content;
     private String attachments;
-    private String level;
+    private int level;
     private Integer courseId; // Để lưu thông tin course liên kết
+    private Double progress;
+
 }

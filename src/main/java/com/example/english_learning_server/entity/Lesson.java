@@ -23,7 +23,7 @@ public class Lesson {
     private String lessonName;
     private String content;
     private String attachments;
-    private String level;
+    private int level;
 
     @ManyToOne
     @JoinColumn(name = "course_id")
@@ -42,7 +42,7 @@ public class Lesson {
     public Lesson() {
     }
 
-    public Lesson(Integer lessonId, String lessonName, String content, String attachments, String level, Course course, List<UserLesson> userLessons, List<Vocabulary> vocabularies) {
+    public Lesson(Integer lessonId, String lessonName, String content, String attachments, int level, Course course, List<UserLesson> userLessons, List<Vocabulary> vocabularies) {
         this.lessonId = lessonId;
         this.lessonName = lessonName;
         this.content = content;
@@ -85,11 +85,11 @@ public class Lesson {
         this.attachments = attachments;
     }
 
-    public String getLevel() {
+    public int getLevel() {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(int level) {
         this.level = level;
     }
 

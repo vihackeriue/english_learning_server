@@ -9,7 +9,7 @@ public class UserLessonDTO {
     private String lessonName;
     private String content;
     private String attachments;
-    private String level;
+    private int level;
     private Integer courseId;
     private double progress;
 
@@ -45,11 +45,11 @@ public class UserLessonDTO {
         this.attachments = attachments;
     }
 
-    public String getLevel() {
+    public int getLevel() {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(int level) {
         this.level = level;
     }
 

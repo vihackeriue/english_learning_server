@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "user_lession")
+@Table(name = "user_lesson")
 @JsonIgnoreProperties({"user", "course", "lesson"}) // Thêm annotation để tránh xuất ra vòng lặp
 public class UserLesson {
 
