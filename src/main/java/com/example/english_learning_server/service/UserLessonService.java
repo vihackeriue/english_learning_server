@@ -145,6 +145,7 @@ public class UserLessonService {
         userLessonRepository.updateProgress(progress, lessonId, userId, courseId);
     }
 
+    // thêm hoặc cập nhật
     public UserLesson startOrUpdateLesson(Integer userId, Integer courseId, Integer lessonId, Double progress) {
         // Kiểm tra xem UserLesson đã tồn tại chưa
         List<UserLesson> userLessons = userLessonRepository.findByUserId(userId);
@@ -163,6 +164,9 @@ public class UserLessonService {
         }
     }
 
+    public Optional<User> findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 
 
 }

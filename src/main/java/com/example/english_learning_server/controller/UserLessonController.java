@@ -2,14 +2,17 @@ package com.example.english_learning_server.controller;
 
 import com.example.english_learning_server.converter.UserLessonMapper;
 import com.example.english_learning_server.dto.UserLessonDTO;
+import com.example.english_learning_server.entity.User;
 import com.example.english_learning_server.entity.UserLesson;
 import com.example.english_learning_server.reponsitory.UserLessonRepository;
+import com.example.english_learning_server.reponsitory.UserReponsitory;
 import com.example.english_learning_server.service.UserLessonService;
 import com.example.english_learning_server.user.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +21,11 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/api/v1/user-Lesson")
+@RequestMapping("/api/v1/user-lesson")
 public class UserLessonController {
+
+    @Autowired
+    private UserReponsitory userRepository;
 
     @Autowired
     private UserLessonService userLessonService;
@@ -57,13 +63,27 @@ public class UserLessonController {
 
 
 
-    @PostMapping("/start-or-update-Lesson")
+    @PostMapping("/start-or-update-lesson")
     public ResponseEntity<UserLesson> startOrUpdateLesson(@RequestBody Map<String, Object> request) {
-        // Lấy các tham số từ body JSON
-        Integer userId = (Integer) request.get("userId");
+        // Lấy email của user từ SecurityContext thông qua access-token
+        String userEmail = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            userEmail = ((UserDetails) principal).getUsername();
+        } else {
+            userEmail = principal.toString();
+        }
+
+        // Tìm user hiện tại dựa trên email
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Integer userId = user.getId(); // Lấy userId từ đối tượng user
+
+        // Lấy các tham số khác từ body JSON
         Integer courseId = (Integer) request.get("courseId");
         Integer lessonId = (Integer) request.get("lessonId");
-        Double progress = ((Number) request.get("progress")).doubleValue();  // Lấy thông tin tiến trình (nếu có)
+        Double progress = ((Number) request.get("progress")).doubleValue(); // Tiến trình
 
         // Kiểm tra xem người dùng đã có UserLesson cho bài học này chưa
         List<UserLesson> userLessons = userLessonService.getUserLessonsByUserId(userId);
@@ -83,6 +103,7 @@ public class UserLessonController {
             return ResponseEntity.ok(userLesson); // Trả về bài học mới được tạo
         }
     }
+
 
 
 }

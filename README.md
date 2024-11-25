@@ -6,9 +6,9 @@ This is a server-side API for an English learning application, built using Java 
 ### Key Technologies
 - **Java**: The primary language used for building the API.
 - **Spring Framework**:
-  - **Spring Boot**: For easy configuration and setup of the application.
-  - **Spring Security**: To handle authentication and authorization.
-  - **Spring MVC**: For building RESTful APIs.
+- **Spring Boot**: For easy configuration and setup of the application.
+- **Spring Security**: To handle authentication and authorization.
+- **Spring MVC**: For building RESTful APIs.
 
 ### Additional Features
 - **Cloudinary**: Used to store and manage images.
@@ -18,22 +18,22 @@ This is a server-side API for an English learning application, built using Java 
 
 ### Auth APIs
 - **Login**
-  - `POST` [http://localhost:8080/api/v1/auth/authenticate](http://localhost:8080/api/v1/auth/authenticate)
+    - `POST` [http://localhost:8080/api/v1/auth/authenticate](http://localhost:8080/api/v1/auth/authenticate)
 
   **Description**
 
-  - The Login API allows users to authenticate by providing their email and password. Upon successful login, the API returns a JWT (JSON Web Token) that can be used for further authentication in protected routes.
+    - The Login API allows users to authenticate by providing their email and password. Upon successful login, the API returns a JWT (JSON Web Token) that can be used for further authentication in protected routes.
 
 
 - **Example in Postman**
-  1. In the **Body** section, select `raw` and set the format to `JSON`.
-  2. Create the JSON body like this:
-     ```json
-     {
-       "email": "tranb@gmail.com",
-       "password": "123456"
-     }
-     ```
+    1. In the **Body** section, select `raw` and set the format to `JSON`.
+    2. Create the JSON body like this:
+       ```json
+       {
+         "email": "tranb@gmail.com",
+         "password": "123456"
+       }
+       ```
 
 - **Sign Up**
     - `POST` [http://localhost:8080/api/v1/auth/register](http://localhost:8080/api/v1/auth/register)
@@ -75,39 +75,39 @@ This is a server-side API for an English learning application, built using Java 
 
 
 - **Logout**
-  - `POST` [http://localhost:8080/api/v1/auth/logout](http://localhost:8080/api/v1/auth/logout)
+    - `POST` [http://localhost:8080/api/v1/auth/logout](http://localhost:8080/api/v1/auth/logout)
 
-  - **Description**:
-  - The Logout API allows users to log out from the application by invalidating their JWT access token. The user must provide the current access token in the Authorization header.
+    - **Description**:
+    - The Logout API allows users to log out from the application by invalidating their JWT access token. The user must provide the current access token in the Authorization header.
 
 
-  - **Example in Postman**
-  1. In the **Authorization** , select `Bearer Token`.
-  2. Enter the access token from login into the box to log out.
+- **Example in Postman**
+1. In the **Authorization** , select `Bearer Token`.
+2. Enter the access token from login into the box to log out.
 
 - **Refresh Token**
-  - `POST` [http://localhost:8080/api/v1/auth/refresh-token](http://localhost:8080/api/v1/auth/refresh-token)
+    - `POST` [http://localhost:8080/api/v1/auth/refresh-token](http://localhost:8080/api/v1/auth/refresh-token)
 
-  - **Description**:
-  - The Refresh Token API allows users to refresh their JWT access token using a valid refresh token. The refresh token must be provided in the Authorization header as a bearer token.
+    - **Description**:
+    - The Refresh Token API allows users to refresh their JWT access token using a valid refresh token. The refresh token must be provided in the Authorization header as a bearer token.
 
 
-  - **Example in Postman**
-  1. In the **Authorization** , select `Bearer Token`.
-  2. Enter the login access token into the box to refresh the token.
-  
+- **Example in Postman**
+1. In the **Authorization** , select `Bearer Token`.
+2. Enter the login access token into the box to refresh the token.
+
 
 ### User APIs
 - **Get List of User Information**
-  - `GET` [http://localhost:8080/api/v1/users](http://localhost:8080/api/v1/users)
+    - `GET` [http://localhost:8080/api/v1/users](http://localhost:8080/api/v1/users)
 
 - **Get User Information by ID**
-  - `GET` [http://localhost:8080/api/v1/users/{id}](http://localhost:8080/api/v1/users/{id})
+    - `GET` [http://localhost:8080/api/v1/users/{id}](http://localhost:8080/api/v1/users/{id})
 
 
 - **Get Current User**
     - `GET` [http://localhost:8080/api/v1/users/me](http://localhost:8080/api/v1/users/me)
-  
+
 
     - **Headers**
     -  | Key            | Value             | Description                       |
@@ -131,10 +131,10 @@ This is a server-side API for an English learning application, built using Java 
 
 ### Course APIs
 - **Add Course**
-  - `POST` [http://localhost:8080/api/v1/courses](http://localhost:8080/api/v1/courses)
+    - `POST` [http://localhost:8080/api/v1/courses](http://localhost:8080/api/v1/courses)
 
-  
-  - **Example in Postman**
+
+- **Example in Postman**
     1. In the **Body** section, select `raw` and set the format to `JSON`.
     2. Create the JSON body like this:
        ```json
@@ -148,23 +148,20 @@ This is a server-side API for an English learning application, built using Java 
        ```
 
 - **Update Course**
-  - `PUT` [http://localhost:8080/api/v1/courses/{id}](http://localhost:8080/api/v1/courses/{id})
+    - `PUT` [http://localhost:8080/api/v1/courses/{id}](http://localhost:8080/api/v1/courses/{id})
 
 
-  - **Example in Postman**
+- **Example in Postman**
     1. In the **Body** section, select `raw` and set the format to `JSON`.
     2. Create the JSON body like this:
     3. similar `post`
 
 
-- **Delete Course**
-  - `DELETE` [http://localhost:8080/api/v1/courses/{id}](http://localhost:8080/api/v1/courses/{id})
-
 - **Show Course List**
-  - `GET` [http://localhost:8080/api/v1/courses](http://localhost:8080/api/v1/courses)
+    - `GET` [http://localhost:8080/api/v1/courses](http://localhost:8080/api/v1/courses)
 
 - **Show Course by ID**
-  - `GET` [http://localhost:8080/api/v1/courses/{id}](http://localhost:8080/api/v1/courses/{id})
+    - `GET` [http://localhost:8080/api/v1/courses/{id}](http://localhost:8080/api/v1/courses/{id})
 
 - **Get all course by access-token**
     - `GET` [http://localhost:8080/api/v1/courses/all-course-by-user](http://localhost:8080/api/v1/courses/all-course-by-user)
@@ -238,43 +235,43 @@ This is a server-side API for an English learning application, built using Java 
 
 ### Lesson APIs
 - **Add Lesson**
-  - `POST` [http://localhost:8080/api/v1/lessons](http://localhost:8080/api/v1/lessons)
+    - `POST` [http://localhost:8080/api/v1/lessons](http://localhost:8080/api/v1/lessons)
 
 
 - **Example in Postman**
-  1. In the **Body** section, select `raw` and set the format to `JSON`.
-  2. Create the JSON body like this:
-     ```json
-      {
-      "lessonName": "Lesson 3",
-      "content": "Lesson content",
-      "attachments": "attachment_link",
-      "level": "beginner",
-      "courseId": 1
-      }
-     ```
+    1. In the **Body** section, select `raw` and set the format to `JSON`.
+    2. Create the JSON body like this:
+       ```json
+        {
+        "lessonName": "Lesson 3",
+        "content": "Lesson content",
+        "attachments": "attachment_link",
+        "level": "beginner",
+        "courseId": 1
+        }
+       ```
 
 - **Update Lesson**
-  - `PUT` [http://localhost:8080/api/v1/lessons/{id}](http://localhost:8080/api/v1/lessons/{id})
-  
+    - `PUT` [http://localhost:8080/api/v1/lessons/{id}](http://localhost:8080/api/v1/lessons/{id})
 
-  - **Example in Postman**
+
+- **Example in Postman**
     1. In the **Body** section, select `raw` and set the format to `JSON`.
     2. Create the JSON body like this:
     3. similar `post`
 
 
 - **Delete Lesson**
-  - `DELETE` [http://localhost:8080/api/v1/lessons/{lessonId}](http://localhost:8080/api/v1/lessons/{lessonId})
+    - `DELETE` [http://localhost:8080/api/v1/lessons/{lessonId}](http://localhost:8080/api/v1/lessons/{lessonId})
 
 - **Show Lesson List**
-  - `GET` [http://localhost:8080/api/v1/lessons](http://localhost:8080/api/v1/lessons)
+    - `GET` [http://localhost:8080/api/v1/lessons](http://localhost:8080/api/v1/lessons)
 
 - **Show Lesson by ID**
-  - `GET` [http://localhost:8080/api/v1/lessons/{lessonId}](http://localhost:8080/api/v1/lessons/{lessonId})
+    - `GET` [http://localhost:8080/api/v1/lessons/{lessonId}](http://localhost:8080/api/v1/lessons/{lessonId})
 
 - **Show Lesson by courses id**
-  - `GET` [http://localhost:8080/api/v1/lessons/course/{course-Id}](http://localhost:8080/api/v1/lessons/course/{course-Id})
+    - `GET` [http://localhost:8080/api/v1/lessons/course/{course-Id}](http://localhost:8080/api/v1/lessons/course/{course-Id})
 
 - **Get lesson by access-token**
     - `GET` [http://localhost:8080/api/v1/lessons/user](http://localhost:8080/api/v1/lessons/user)
@@ -331,7 +328,7 @@ This is a server-side API for an English learning application, built using Java 
 
 ### UserCourse APIs
 - **Add UserCourse**
-  - `POST` [http://localhost:8080/api/v1/user-Courses/enroll](http://localhost:8080/api/v1/user-Courses/enroll)
+    - `POST` [http://localhost:8080/api/v1/user-courses/enroll](http://localhost:8080/api/v1/user-courses/enroll)
 
 
 - **Example in Postman**
@@ -348,17 +345,17 @@ This is a server-side API for an English learning application, built using Java 
        ```
 
 - **Delete UserCourse**
-  - `DELETE` [http://localhost:8080/api/v1/user-Courses/{id}](http://localhost:8080/api/v1/user-Courses/{id})
+    - `DELETE` [http://localhost:8080/api/v1/user-courses/{id}](http://localhost:8080/api/v1/user-courses/{id})
 
 - **Show Lesson UserCourse**
-  - `GET` [http://localhost:8080/api/v1/user-Courses](http://localhost:8080/api/v1/user-Courses)
+    - `GET` [http://localhost:8080/api/v1/user-courses](http://localhost:8080/api/v1/user-courses)
 
 - **Show UserCourse by ID**
-  - `GET` [http://localhost:8080/api/v1/user-Courses/{id}](http://localhost:8080/api/v1/user-Courses/{id})
+    - `GET` [http://localhost:8080/api/v1/user-courses/{id}](http://localhost:8080/api/v1/user-courses/{id})
 
 
 - **Get Current userCourses by access-token**
-    - `GET` [http://localhost:8080/api/v1/user-Courses/me](http://localhost:8080/api/v1/user-Courses/me)
+    - `GET` [http://localhost:8080/api/v1/user-courses/me](http://localhost:8080/api/v1/user-courses/me)
 
 
     - **Headers**
@@ -399,9 +396,9 @@ This is a server-side API for an English learning application, built using Java 
 
 ### UserLesson APIs
 
-  **Add or Update User Lesson**
+**Add or Update User Lesson**
 - **Method**: `POST`
-- **Endpoint**: [http://localhost:8080/api/v1/user-Lesson/start-or-update-Lesson](http://localhost:8080/api/v1/user-Lesson/start-or-update-Lesson)
+- **Endpoint**: [http://localhost:8080/api/v1/user-lesson/start-or-update-Lesson](http://localhost:8080/api/v1/user-lesson/start-or-update-Lesson)
 
   **Description**
 
@@ -411,7 +408,6 @@ This is a server-side API for an English learning application, built using Java 
 
 - The body of the request must contain the following parameters:
 
-- `userId`: The ID of the user.
 - `courseId`: The ID of the course.
 - `lessonId`: The ID of the lesson.
 - `progress`: The progress of the lesson (optional, if provided it will update the progress of the lesson).
@@ -419,21 +415,25 @@ This is a server-side API for an English learning application, built using Java 
   **Example Request**
     ```json
     {
-        "userId": 2,
         "courseId": 2,
         "lessonId": 3,
         "progress": 50
     }
     ```  
 
+        - **Headers**
+        -  | Key            | Value             | Description                       |
+        -  |----------------|-------------------|-----------------------------------|
+        -  | Authorization  | Bearer {JWT}      | JWT access token from login       |
+
 - **Delete User Lesson**
-  - `DELETE` [http://localhost:8080/api/v1/user-Lesson/{id}](http://localhost:8080/api/v1/user-Lesson/{id})
+    - `DELETE` [http://localhost:8080/api/v1/user-lesson/{id}](http://localhost:8080/api/v1/user-lesson/{id})
 
 - **Show all User Lesson**
-  - `GET` [http://localhost:8080/api/v1/user-Lesson](http://localhost:8080/api/v1/user-Lesson)
+    - `GET` [http://localhost:8080/api/v1/user-Lesson](http://localhost:8080/api/v1/user-Lesson)
 
 - **Get all Current userLesson by access-token**
-    - `GET` [http://localhost:8080/api/v1/user-Lesson/user](http://localhost:8080/api/v1/user-Lesson/user)
+    - `GET` [http://localhost:8080/api/v1/user-lesson/user](http://localhost:8080/api/v1/user-lesson/user)
 
 
     - **Headers**
@@ -477,50 +477,50 @@ This is a server-side API for an English learning application, built using Java 
 
 ### Vocabulary APIs
 - **Add Vocabulary**
-  - `POST` [http://localhost:8080/api/v1/vocabularies](http://localhost:8080/api/v1/vocabularies)
+    - `POST` [http://localhost:8080/api/v1/vocabularies](http://localhost:8080/api/v1/vocabularies)
 
 - **Example in Postman**
-  1. In the **Body** section, select `raw` and set the format to `JSON`.
-  2. Create the JSON body like this:
-     ```json
-      {
-      "word": "banana",
-      "meaning": "A fruit that is typically green, and yellow.",
-      "description": "An banana is a sweet fruit from the banana tree, Malus domestica.",
-      "image": "http://example.com/images/banana.jpg",
-      "audio": "http://example.com/audio/banana.mp3",
-      "lessonId": 1
-      }
-     ```
+    1. In the **Body** section, select `raw` and set the format to `JSON`.
+    2. Create the JSON body like this:
+       ```json
+        {
+        "word": "banana",
+        "meaning": "A fruit that is typically green, and yellow.",
+        "description": "An banana is a sweet fruit from the banana tree, Malus domestica.",
+        "image": "http://example.com/images/banana.jpg",
+        "audio": "http://example.com/audio/banana.mp3",
+        "lessonId": 1
+        }
+       ```
 
 - **Delete Vocabulary**
-  - `DELETE` [http://localhost:8080/api/v1/vocabularies/{id}](http://localhost:8080/api/v1/vocabularies/{id})
+    - `DELETE` [http://localhost:8080/api/v1/vocabularies/{id}](http://localhost:8080/api/v1/vocabularies/{id})
 
 - **Show Vocabulary**
-  - `GET` [http://localhost:8080/api/v1/vocabularies](http://localhost:8080/api/v1/vocabularies)
+    - `GET` [http://localhost:8080/api/v1/vocabularies](http://localhost:8080/api/v1/vocabularies)
 
 - **Show Vocabulary by id**
-  - `GET` [http://localhost:8080/api/v1/vocabularies/{id}](http://localhost:8080/api/v1/vocabularies/{id})
+    - `GET` [http://localhost:8080/api/v1/vocabularies/{id}](http://localhost:8080/api/v1/vocabularies/{id})
 
 - **Show Vocabulary by word**
-  - `GET` [http://localhost:8080/api/v1/vocabularies/word/{word}](http://localhost:8080/api/v1/vocabularies/word/{word})
+    - `GET` [http://localhost:8080/api/v1/vocabularies/word/{word}](http://localhost:8080/api/v1/vocabularies/word/{word})
 
 - **Show Vocabulary by lesson id**
-  - `GET` [http://localhost:8080/api/v1/vocabularies/lesson/{lessonId}](http://localhost:8080/api/v1/vocabularies/lesson/{lessonid})
+    - `GET` [http://localhost:8080/api/v1/vocabularies/lesson/{lessonId}](http://localhost:8080/api/v1/vocabularies/lesson/{lessonid})
 
 - **Update vocabulary**
-  - `PUT` [http://localhost:8080/api/v1/vocabularies/{id}](http://localhost:8080/api/v1/vocabularies/{id})
+    - `PUT` [http://localhost:8080/api/v1/vocabularies/{id}](http://localhost:8080/api/v1/vocabularies/{id})
 
 
 - **Example in Postman**
-  1. In the **Body** section, select `raw` and set the format to `JSON`.
-  2. Create the JSON body like this:
-  3. similar `post`
+    1. In the **Body** section, select `raw` and set the format to `JSON`.
+    2. Create the JSON body like this:
+    3. similar `post`
 
 
 ### VocabularyUser APIs
 - **Add VocabularyUser**
-  - `POST` [http://localhost:8080/api/v1/vocabularyUser?userId={?}&vocabId={?}&progress={?}](http://localhost:8080/api/v1/vocabularyUser?userId={?}&vocabId={?}&progress={?})
+    - `POST` [http://localhost:8080/api/v1/vocabularyUser?userId={?}&vocabId={?}&progress={?}](http://localhost:8080/api/v1/vocabularyUser?userId={?}&vocabId={?}&progress={?})
 
 
 - **Example in Postman**
@@ -536,13 +536,13 @@ This is a server-side API for an English learning application, built using Java 
 
 
 - **Delete VocabularyUser**
-  - `DELETE` [http://localhost:8080/api/v1/vocabularyUser/{id}](http://localhost:8080/api/v1/vocabularyUser/{id})
+    - `DELETE` [http://localhost:8080/api/v1/vocabularyUser/{id}](http://localhost:8080/api/v1/vocabularyUser/{id})
 
 - **Show VocabularyUser**
-  - `GET` [http://localhost:8080/api/v1/vocabularyUser/all](http://localhost:8080/api/v1/vocabularyUser/all)
+    - `GET` [http://localhost:8080/api/v1/vocabularyUser/all](http://localhost:8080/api/v1/vocabularyUser/all)
 
 - **Show VocabularyUser by id**
-  - `GET` [http://localhost:8080/api/v1/vocabularyUser/{id}](http://localhost:8080/api/v1/vocabularyUser/{id})
+    - `GET` [http://localhost:8080/api/v1/vocabularyUser/{id}](http://localhost:8080/api/v1/vocabularyUser/{id})
 
 - **Get Current VocabularyUser**
     - `GET` [http://localhost:8080/api/v1/vocabularyUser/user](http://localhost:8080/api/v1/vocabularyUser/user)

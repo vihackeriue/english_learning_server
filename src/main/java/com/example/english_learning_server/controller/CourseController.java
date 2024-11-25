@@ -21,6 +21,7 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
+//    lấy tất cả khoá học: http://localhost:8080/api/v1/courses
     @GetMapping
     public ResponseEntity<List<CourseDTO>> getAllCourses() {
         List<CourseDTO> courseDTOs = courseService.getAllCourses()
@@ -30,6 +31,7 @@ public class CourseController {
         return new ResponseEntity<>(courseDTOs, HttpStatus.OK);
     }
 
+//    lấy khoá học bởi id khoá học: http://localhost:8080/api/v1/courses/1
     @GetMapping("/{id}")
     public ResponseEntity<CourseDTO> getCourseById(@PathVariable Integer id) {
         Optional<Course> course = courseService.getCourseById(id);
@@ -37,12 +39,14 @@ public class CourseController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    // thêm khoá học : http://localhost:8080/api/v1/courses
     @PostMapping
     public ResponseEntity<CourseDTO> addCourse(@RequestBody Course course) {
         Course newCourse = courseService.addCourse(course);
         return new ResponseEntity<>(CourseMapper.toDTO(newCourse), HttpStatus.CREATED);
     }
 
+//    cập nhật khoá học: http://localhost:8080/api/v1/courses/1
     @PutMapping("/{id}")
     public ResponseEntity<CourseDTO> updateCourse(@PathVariable Integer id, @RequestBody Course courseDetails) {
         Course updatedCourse = courseService.updateCourse(id, courseDetails);
@@ -51,6 +55,7 @@ public class CourseController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    // lấy tất cả khoá học theo access-token người dùng:
     @GetMapping("/all-course-by-user")
     public ResponseEntity<List<UserCourseDTO>> getCoursesForCurrentUser() {
         List<UserCourseDTO> courses = courseService.getCoursesForCurrentUser();
