@@ -51,7 +51,7 @@ public class CourseController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/current-user")
+    @GetMapping("/all-course-by-user")
     public ResponseEntity<List<UserCourseDTO>> getCoursesForCurrentUser() {
         List<UserCourseDTO> courses = courseService.getCoursesForCurrentUser();
         return new ResponseEntity<>(courses, HttpStatus.OK);

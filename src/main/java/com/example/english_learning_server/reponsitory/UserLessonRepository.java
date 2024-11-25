@@ -15,10 +15,13 @@ import java.util.Optional;
 public interface UserLessonRepository extends JpaRepository<UserLesson, Long> {
     // Tìm tất cả UserLesson theo userId
     List<UserLesson> findByUserId(Integer userId);
+
+
     // Cập nhật tiến trình (progress) theo id
     @Modifying
-    @Query("UPDATE UserLesson u SET u.progress = :progress WHERE u.id = :id")
-    void updateProgress(@Param("id") Long id, @Param("progress") Double progress);
+    @Query("UPDATE UserLesson u SET u.progress = :progress WHERE u.lesson.lessonId = :lessonId AND u.user.id = :userId AND u.course.courseId = :courseId")
+    void updateProgress(@Param("progress") double progress, @Param("lessonId") Integer lessonId, @Param("userId") Integer userId, @Param("courseId") Integer courseId);
+
 
     @Query(value = """
         SELECT 

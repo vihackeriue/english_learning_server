@@ -60,27 +60,6 @@ public class UserLessonService {
         }
     }
 
-//    // Lấy danh sách UserLessons của user hiện tại
-//    public List<UserLessonDTO> getUserLessonsForCurrentUser() {
-//        // Lấy email của user từ SecurityContext
-//        String userEmail = null;
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        if (principal instanceof UserDetails) {
-//            userEmail = ((UserDetails) principal).getUsername();
-//        } else {
-//            userEmail = principal.toString();
-//        }
-//
-//        // Tìm user hiện tại
-//        User user = userRepository.findByEmail(userEmail)
-//                .orElseThrow(() -> new RuntimeException("User not found"));
-//
-//        // Lấy danh sách UserLesson của user và chuyển đổi sang DTO
-//        List<UserLesson> userLessons = userLessonRepository.findByUserId(user.getId());
-//        return userLessons.stream()
-//                .map(userLessonMapper::toDTO)
-//                .collect(Collectors.toList());
-//    }
 
     // Lấy danh sách UserLessons của user hiện tại và sắp xếp theo level
     public List<UserLessonDTO> getUserLessonsForCurrentUser() {
@@ -159,6 +138,31 @@ public class UserLessonService {
         // Trả về UserLessonDTO đã được cập nhật
         return userLessonMapper.toDTO(updatedUserLesson);
     }
+
+    // cập nhật progress
+    @Transactional
+    public void updateUserLessonProgress(Integer userId, Integer courseId, Integer lessonId, double progress) {
+        userLessonRepository.updateProgress(progress, lessonId, userId, courseId);
+    }
+
+    public UserLesson startOrUpdateLesson(Integer userId, Integer courseId, Integer lessonId, Double progress) {
+        // Kiểm tra xem UserLesson đã tồn tại chưa
+        List<UserLesson> userLessons = userLessonRepository.findByUserId(userId);
+        Optional<UserLesson> existingUserLesson = userLessons.stream()
+                .filter(ul -> ul.getCourse().getCourseId().equals(courseId) && ul.getLesson().getLessonId().equals(lessonId))
+                .findFirst();
+
+        if (existingUserLesson.isPresent()) {
+            // Nếu đã có UserLesson, cập nhật tiến trình
+            UserLesson userLesson = existingUserLesson.get();
+            userLesson.setProgress(progress);
+            return userLessonRepository.save(userLesson);
+        } else {
+            // Nếu chưa có UserLesson, tạo mới
+            return startLesson(userId, courseId, lessonId); // Gọi lại phương thức startLesson để tạo mới UserLesson
+        }
+    }
+
 
 
 }

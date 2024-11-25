@@ -20,6 +20,10 @@ This is a server-side API for an English learning application, built using Java 
 - **Login**
   - `POST` [http://localhost:8080/api/v1/auth/authenticate](http://localhost:8080/api/v1/auth/authenticate)
 
+  **Description**
+
+  - The Login API allows users to authenticate by providing their email and password. Upon successful login, the API returns a JWT (JSON Web Token) that can be used for further authentication in protected routes.
+
 
 - **Example in Postman**
   1. In the **Body** section, select `raw` and set the format to `JSON`.
@@ -33,6 +37,10 @@ This is a server-side API for an English learning application, built using Java 
 
 - **Sign Up**
     - `POST` [http://localhost:8080/api/v1/auth/register](http://localhost:8080/api/v1/auth/register)
+
+- **Description**:
+
+- The Sign Up API allows users to create a new account by providing their personal information such as name, email, password, phone number, avatar, and role.
 
 
 - **Example in Postman**
@@ -68,7 +76,10 @@ This is a server-side API for an English learning application, built using Java 
 
 - **Logout**
   - `POST` [http://localhost:8080/api/v1/auth/logout](http://localhost:8080/api/v1/auth/logout)
-  
+
+  - **Description**:
+  - The Logout API allows users to log out from the application by invalidating their JWT access token. The user must provide the current access token in the Authorization header.
+
 
   - **Example in Postman**
   1. In the **Authorization** , select `Bearer Token`.
@@ -76,6 +87,9 @@ This is a server-side API for an English learning application, built using Java 
 
 - **Refresh Token**
   - `POST` [http://localhost:8080/api/v1/auth/refresh-token](http://localhost:8080/api/v1/auth/refresh-token)
+
+  - **Description**:
+  - The Refresh Token API allows users to refresh their JWT access token using a valid refresh token. The refresh token must be provided in the Authorization header as a bearer token.
 
 
   - **Example in Postman**
@@ -153,7 +167,7 @@ This is a server-side API for an English learning application, built using Java 
   - `GET` [http://localhost:8080/api/v1/courses/{id}](http://localhost:8080/api/v1/courses/{id})
 
 - **Get all course by access-token**
-    - `GET` [http://localhost:8080/api/v1/courses/current-user](http://localhost:8080/api/v1/courses/current-user)
+    - `GET` [http://localhost:8080/api/v1/courses/all-course-by-user](http://localhost:8080/api/v1/courses/all-course-by-user)
 
 
     - **Headers**
@@ -262,9 +276,6 @@ This is a server-side API for an English learning application, built using Java 
 - **Show Lesson by courses id**
   - `GET` [http://localhost:8080/api/v1/lessons/course/{course-Id}](http://localhost:8080/api/v1/lessons/course/{course-Id})
 
-- **Show Lesson by level**
-  - `GET` [http://localhost:8080/api/v1/lessons/level/{level}](http://localhost:8080/api/v1/lessons/level/{level})
-
 - **Get lesson by access-token**
     - `GET` [http://localhost:8080/api/v1/lessons/user](http://localhost:8080/api/v1/lessons/user)
 
@@ -320,7 +331,7 @@ This is a server-side API for an English learning application, built using Java 
 
 ### UserCourse APIs
 - **Add UserCourse**
-  - `POST` [http://localhost:8080/api/v1/user-Courses/enroll?userId&courseId&studentCode&role&status](http://localhost:8080/api/v1/user-Courses/enroll?userId&courseId&studentCode&role&status)
+  - `POST` [http://localhost:8080/api/v1/user-Courses/enroll](http://localhost:8080/api/v1/user-Courses/enroll)
 
 
 - **Example in Postman**
@@ -336,7 +347,6 @@ This is a server-side API for an English learning application, built using Java 
         }
        ```
 
-
 - **Delete UserCourse**
   - `DELETE` [http://localhost:8080/api/v1/user-Courses/{id}](http://localhost:8080/api/v1/user-Courses/{id})
 
@@ -346,11 +356,8 @@ This is a server-side API for an English learning application, built using Java 
 - **Show UserCourse by ID**
   - `GET` [http://localhost:8080/api/v1/user-Courses/{id}](http://localhost:8080/api/v1/user-Courses/{id})
 
-- **Show UserCourse by user id**
-  - `GET` [http://localhost:8080/api/v1/user-Courses/user/{id}](http://localhost:8080/api/v1/user-Courses/user/{id})
 
-
-- **Get Current userCourses**
+- **Get Current userCourses by access-token**
     - `GET` [http://localhost:8080/api/v1/user-Courses/me](http://localhost:8080/api/v1/user-Courses/me)
 
 
@@ -391,33 +398,42 @@ This is a server-side API for an English learning application, built using Java 
 
 
 ### UserLesson APIs
-- **Add User Lesson**
-  - `POST` [http://localhost:8080/api/v1/user-Lesson/start-Lesson](http://localhost:8080/api/v1/userLesson/start-Lesson)
 
+  **Add or Update User Lesson**
+- **Method**: `POST`
+- **Endpoint**: [http://localhost:8080/api/v1/user-Lesson/start-or-update-Lesson](http://localhost:8080/api/v1/user-Lesson/start-or-update-Lesson)
 
-- **Example in Postman**
-    1. In the **Body** section, select `raw` and set the format to `JSON`.
-    2. Create the JSON body like this:
-       ```json
-        {
+  **Description**
+
+- This API allows you to start a new lesson for a user or update the progress of an existing lesson for a specific user in a particular course. It checks whether a `UserLesson` already exists for the specified `userId`, `courseId`, and `lessonId`. If it exists, it updates the progress, otherwise, it creates a new `UserLesson`.
+
+  **Request Body**
+
+- The body of the request must contain the following parameters:
+
+- `userId`: The ID of the user.
+- `courseId`: The ID of the course.
+- `lessonId`: The ID of the lesson.
+- `progress`: The progress of the lesson (optional, if provided it will update the progress of the lesson).
+
+  **Example Request**
+    ```json
+    {
         "userId": 2,
         "courseId": 2,
-        "lessonId": 3
-        }
-       ```
-     
+        "lessonId": 3,
+        "progress": 50
+    }
+    ```  
 
 - **Delete User Lesson**
   - `DELETE` [http://localhost:8080/api/v1/user-Lesson/{id}](http://localhost:8080/api/v1/user-Lesson/{id})
 
-- **Show User Lesson**
+- **Show all User Lesson**
   - `GET` [http://localhost:8080/api/v1/user-Lesson](http://localhost:8080/api/v1/user-Lesson)
 
-- **Show User Lesson by user id**
-  - `GET` [http://localhost:8080/api/v1/user-Lesson/{id}](http://localhost:8080/api/v1/user-Lesson/{id})
-
-- **Get Current userLesson**
-    - `GET` [http://localhost:8080/api/v1/user-Lesson/me](http://localhost:8080/api/v1/user-Lesson/me)
+- **Get all Current userLesson by access-token**
+    - `GET` [http://localhost:8080/api/v1/user-Lesson/user](http://localhost:8080/api/v1/user-Lesson/user)
 
 
     - **Headers**
@@ -457,16 +473,6 @@ This is a server-side API for an English learning application, built using Java 
       }
       ]
       ```
-- **Update userLesson Process**
-    - `PUT` [http://localhost:8080/api/v1/user-Lesson/{id}](http://localhost:8080/api/v1/user-Lesson/{id})
-- **Example in Postman**
-    1. In the **Body** section, select `raw` and set the format to `JSON`.
-    2. Create the JSON body like this:
-       ```json
-        {
-          "progress": 50.0
-        }
-       ```
 
 
 ### Vocabulary APIs

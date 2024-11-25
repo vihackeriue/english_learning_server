@@ -68,13 +68,13 @@ public class LessonController {
         return new ResponseEntity<>(lessons, HttpStatus.OK);
     }
 
-    @GetMapping("/level/{level}")
-    public ResponseEntity<List<LessonDTO>> getLessonsByLevel(@PathVariable int level) {
-        List<LessonDTO> lessons = lessonService.getLessonsByLevel(level).stream()
-                .map(lessonMapper::toDTO)
-                .collect(Collectors.toList());
-        return new ResponseEntity<>(lessons, HttpStatus.OK);
-    }
+//    @GetMapping("/level/{level}")
+//    public ResponseEntity<List<LessonDTO>> getLessonsByLevel(@PathVariable int level) {
+//        List<LessonDTO> lessons = lessonService.getLessonsByLevel(level).stream()
+//                .map(lessonMapper::toDTO)
+//                .collect(Collectors.toList());
+//        return new ResponseEntity<>(lessons, HttpStatus.OK);
+//    }
 
     @GetMapping("/user")
     public ResponseEntity<List<LessonDTO>> getLessonsForCurrentUser(

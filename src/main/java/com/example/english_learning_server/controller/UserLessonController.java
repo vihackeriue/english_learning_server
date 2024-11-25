@@ -3,6 +3,7 @@ package com.example.english_learning_server.controller;
 import com.example.english_learning_server.converter.UserLessonMapper;
 import com.example.english_learning_server.dto.UserLessonDTO;
 import com.example.english_learning_server.entity.UserLesson;
+import com.example.english_learning_server.reponsitory.UserLessonRepository;
 import com.example.english_learning_server.service.UserLessonService;
 import com.example.english_learning_server.user.Role;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 
 @RestController
@@ -25,20 +27,10 @@ public class UserLessonController {
     @Autowired
     private UserLessonMapper userLessonMapper;
 
-    // API để người dùng bắt đầu học một bài học
+    @Autowired
+    private UserLessonRepository userLessonRepository;
 
-    // API để người dùng bắt đầu học một bài học
-    @PostMapping("/start-Lesson")
-    public ResponseEntity<UserLesson> startLesson(@RequestBody Map<String, Object> request) {
-        // Lấy các tham số từ body JSON
-        Integer userId = (Integer) request.get("userId");
-        Integer courseId = (Integer) request.get("courseId");
-        Integer lessonId = (Integer) request.get("lessonId");
 
-        // Gọi service để bắt đầu bài học
-        UserLesson userLesson = userLessonService.startLesson(userId, courseId, lessonId);
-        return ResponseEntity.ok(userLesson);
-    }
 
     // API hiển thị danh sách tất cả UserLesson
     @GetMapping
@@ -47,18 +39,7 @@ public class UserLessonController {
         return ResponseEntity.ok(userLessons);
     }
 
-    // API hiển thị danh sách UserLesson theo userId
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<UserLesson>> getUserLessonsByUserId(@PathVariable Integer userId) {
-        List<UserLesson> userLessons = userLessonService.getUserLessonsByUserId(userId);
-        return ResponseEntity.ok(userLessons);
-    }
 
-    // Lấy UserLessons của user hiện tại
-//    @GetMapping("/me")
-//    public List<UserLessonDTO> getUserLessonsForCurrentUser() {
-//        return userLessonService.getUserLessonsForCurrentUser();
-//    }
 
     // Lấy danh sách bài học của người dùng hiện tại
     @GetMapping("/user")
@@ -74,10 +55,33 @@ public class UserLessonController {
         return ResponseEntity.noContent().build();
     }
 
-    // Cập nhật UserLesson
-    @PutMapping("/{id}")
-    public UserLessonDTO updateUserLesson(@PathVariable Long id, @RequestBody UserLessonDTO userLessonDTO) {
-        return userLessonService.updateUserLesson(id, userLessonDTO);
+
+
+    @PostMapping("/start-or-update-Lesson")
+    public ResponseEntity<UserLesson> startOrUpdateLesson(@RequestBody Map<String, Object> request) {
+        // Lấy các tham số từ body JSON
+        Integer userId = (Integer) request.get("userId");
+        Integer courseId = (Integer) request.get("courseId");
+        Integer lessonId = (Integer) request.get("lessonId");
+        Double progress = ((Number) request.get("progress")).doubleValue();  // Lấy thông tin tiến trình (nếu có)
+
+        // Kiểm tra xem người dùng đã có UserLesson cho bài học này chưa
+        List<UserLesson> userLessons = userLessonService.getUserLessonsByUserId(userId);
+        Optional<UserLesson> existingUserLesson = userLessons.stream()
+                .filter(ul -> ul.getCourse().getCourseId().equals(courseId) && ul.getLesson().getLessonId().equals(lessonId))
+                .findFirst();
+
+        if (existingUserLesson.isPresent()) {
+            // Nếu UserLesson đã tồn tại, cập nhật tiến trình
+            UserLesson userLesson = existingUserLesson.get();
+            userLesson.setProgress(progress);
+            UserLesson updatedUserLesson = userLessonRepository.save(userLesson);
+            return ResponseEntity.ok(updatedUserLesson); // Trả về bài học đã được cập nhật
+        } else {
+            // Nếu UserLesson chưa tồn tại, tạo mới một UserLesson
+            UserLesson userLesson = userLessonService.startLesson(userId, courseId, lessonId);
+            return ResponseEntity.ok(userLesson); // Trả về bài học mới được tạo
+        }
     }
 
 

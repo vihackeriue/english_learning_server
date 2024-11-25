@@ -47,11 +47,6 @@ public class UserCourseController {
         return userCourseService.getUserCourseById(id);
     }
 
-    // Lấy danh sách UserCourses theo userId
-    @GetMapping("/user/{userId}")
-    public List<UserCourseDTO> getUserCoursesByUserId(@PathVariable Integer userId) {
-        return userCourseService.getUserCoursesByUserId(userId);
-    }
 
     // Xóa UserCourse theo id
     @DeleteMapping("/{id}")
