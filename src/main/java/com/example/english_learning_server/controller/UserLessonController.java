@@ -16,7 +16,7 @@ import java.util.Map;
 
 
 @RestController
-@RequestMapping("/api/v1/userLesson")
+@RequestMapping("/api/v1/user-Lesson")
 public class UserLessonController {
 
     @Autowired
@@ -28,7 +28,7 @@ public class UserLessonController {
     // API để người dùng bắt đầu học một bài học
 
     // API để người dùng bắt đầu học một bài học
-    @PostMapping("/startLesson")
+    @PostMapping("/start-Lesson")
     public ResponseEntity<UserLesson> startLesson(@RequestBody Map<String, Object> request) {
         // Lấy các tham số từ body JSON
         Integer userId = (Integer) request.get("userId");

@@ -3,6 +3,7 @@ package com.example.english_learning_server.controller;
 
 import com.example.english_learning_server.converter.CourseMapper;
 import com.example.english_learning_server.dto.CourseDTO;
+import com.example.english_learning_server.dto.UserCourseDTO;
 import com.example.english_learning_server.entity.Course;
 import com.example.english_learning_server.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +49,11 @@ public class CourseController {
         return updatedCourse != null
                 ? new ResponseEntity<>(CourseMapper.toDTO(updatedCourse), HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/current-user")
+    public ResponseEntity<List<UserCourseDTO>> getCoursesForCurrentUser() {
+        List<UserCourseDTO> courses = courseService.getCoursesForCurrentUser();
+        return new ResponseEntity<>(courses, HttpStatus.OK);
     }
 }

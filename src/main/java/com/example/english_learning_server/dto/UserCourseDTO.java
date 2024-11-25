@@ -20,5 +20,7 @@ public class UserCourseDTO {
     private Integer statusCourse;
     private Long maxQuantity;
     private String image;
+    private String enrollmentStatus;
+
 
 }

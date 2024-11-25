@@ -60,7 +60,7 @@ public class LessonController {
         return isDeleted ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/course/{courseId}")
+    @GetMapping("/course/{course-Id}")
     public ResponseEntity<List<LessonDTO>> getLessonsByCourseId(@PathVariable Integer courseId) {
         List<LessonDTO> lessons = lessonService.getLessonsByCourseId(courseId).stream()
                 .map(lessonMapper::toDTO)

@@ -152,6 +152,76 @@ This is a server-side API for an English learning application, built using Java 
 - **Show Course by ID**
   - `GET` [http://localhost:8080/api/v1/courses/{id}](http://localhost:8080/api/v1/courses/{id})
 
+- **Get all course by access-token**
+    - `GET` [http://localhost:8080/api/v1/courses/current-user](http://localhost:8080/api/v1/courses/current-user)
+
+
+    - **Headers**
+    -  | Key            | Value             | Description                       |
+    -  |----------------|-------------------|-----------------------------------|
+    -  | Authorization  | Bearer {JWT}      | JWT access token from login       |
+
+    - **Response Example**
+      ```json
+        [
+            {
+                "courseId": 1,
+                "courseName": "test 1",
+                "courseCode": ".",
+                "statusCourse": 1,
+                "maxQuantity": 40,
+                "image": "https://example.com/image.png",
+                "enrollmentStatus": "ENROLLED"
+            },
+            {
+                "courseId": 2,
+                "courseName": "test 2",
+                "courseCode": ".",
+                "statusCourse": 1,
+                "maxQuantity": 40,
+                "image": "https://example.com/image.png",
+                "enrollmentStatus": "ENROLLED"
+            },
+            {
+                "courseId": 3,
+                "courseName": "test 3",
+                "courseCode": ".",
+                "statusCourse": 1,
+                "maxQuantity": 40,
+                "image": "https://example.com/image.png",
+                "enrollmentStatus": "ENROLLED"
+            },
+            {
+                "courseId": 4,
+                "courseName": "test 3",
+                "courseCode": ".",
+                "statusCourse": 1,
+                "maxQuantity": 40,
+                "image": "https://example.com/image.png",
+                "enrollmentStatus": "ENROLLED"
+            },
+            {
+                "courseId": 5,
+                "courseName": "test 3",
+                "courseCode": ".",
+                "statusCourse": 1,
+                "maxQuantity": 40,
+                "image": "https://example.com/image.png",
+                "enrollmentStatus": "NOT_ENROLLED"
+            },
+            {
+                "courseId": 6,
+                "courseName": "test 3",
+                "courseCode": ".",
+                "statusCourse": 1,
+                "maxQuantity": 40,
+                "image": "https://example.com/image.png",
+                "enrollmentStatus": "NOT_ENROLLED"
+            }
+        ]
+      ```
+
+
 ### Lesson APIs
 - **Add Lesson**
   - `POST` [http://localhost:8080/api/v1/lessons](http://localhost:8080/api/v1/lessons)
@@ -181,16 +251,16 @@ This is a server-side API for an English learning application, built using Java 
 
 
 - **Delete Lesson**
-  - `DELETE` [http://localhost:8080/api/v1/lessons/{id}](http://localhost:8080/api/v1/lessons/{id})
+  - `DELETE` [http://localhost:8080/api/v1/lessons/{lessonId}](http://localhost:8080/api/v1/lessons/{lessonId})
 
 - **Show Lesson List**
   - `GET` [http://localhost:8080/api/v1/lessons](http://localhost:8080/api/v1/lessons)
 
 - **Show Lesson by ID**
-  - `GET` [http://localhost:8080/api/v1/lessons/{id}](http://localhost:8080/api/v1/lessons/{id})
+  - `GET` [http://localhost:8080/api/v1/lessons/{lessonId}](http://localhost:8080/api/v1/lessons/{lessonId})
 
 - **Show Lesson by courses id**
-  - `GET` [http://localhost:8080/api/v1/lessons/course/{id}](http://localhost:8080/api/v1/lessons/course/{id})
+  - `GET` [http://localhost:8080/api/v1/lessons/course/{course-Id}](http://localhost:8080/api/v1/lessons/course/{course-Id})
 
 - **Show Lesson by level**
   - `GET` [http://localhost:8080/api/v1/lessons/level/{level}](http://localhost:8080/api/v1/lessons/level/{level})
@@ -250,7 +320,7 @@ This is a server-side API for an English learning application, built using Java 
 
 ### UserCourse APIs
 - **Add UserCourse**
-  - `POST` [http://localhost:8080/api/v1/userCourses/enroll?userId&courseId&studentCode&role&status](http://localhost:8080/api/v1/userCourses/enroll?userId&courseId&studentCode&role&status)
+  - `POST` [http://localhost:8080/api/v1/user-Courses/enroll?userId&courseId&studentCode&role&status](http://localhost:8080/api/v1/user-Courses/enroll?userId&courseId&studentCode&role&status)
 
 
 - **Example in Postman**
@@ -268,20 +338,20 @@ This is a server-side API for an English learning application, built using Java 
 
 
 - **Delete UserCourse**
-  - `DELETE` [http://localhost:8080/api/v1/lessons/{id}](http://localhost:8080/api/v1/lessons/{id})
+  - `DELETE` [http://localhost:8080/api/v1/user-Courses/{id}](http://localhost:8080/api/v1/user-Courses/{id})
 
 - **Show Lesson UserCourse**
-  - `GET` [http://localhost:8080/api/v1/userCourses](http://localhost:8080/api/v1/userCourses)
+  - `GET` [http://localhost:8080/api/v1/user-Courses](http://localhost:8080/api/v1/user-Courses)
 
 - **Show UserCourse by ID**
-  - `GET` [http://localhost:8080/api/v1/userCourses/{id}](http://localhost:8080/api/v1/userCourses/{id})
+  - `GET` [http://localhost:8080/api/v1/user-Courses/{id}](http://localhost:8080/api/v1/user-Courses/{id})
 
 - **Show UserCourse by user id**
-  - `GET` [http://localhost:8080/api/v1/userCourses/user/{id}](http://localhost:8080/api/v1/userCourses/user/{id})
+  - `GET` [http://localhost:8080/api/v1/user-Courses/user/{id}](http://localhost:8080/api/v1/user-Courses/user/{id})
 
 
 - **Get Current userCourses**
-    - `GET` [http://localhost:8080/api/v1/userCourses/me](http://localhost:8080/api/v1/userCourses/me)
+    - `GET` [http://localhost:8080/api/v1/user-Courses/me](http://localhost:8080/api/v1/user-Courses/me)
 
 
     - **Headers**
@@ -322,7 +392,7 @@ This is a server-side API for an English learning application, built using Java 
 
 ### UserLesson APIs
 - **Add User Lesson**
-  - `POST` [http://localhost:8080/api/v1/userLesson/startLesson?userId&courseId&lessonId](http://localhost:8080/api/v1/userLesson/startLesson?userId&courseId&lessonId)
+  - `POST` [http://localhost:8080/api/v1/user-Lesson/start-Lesson](http://localhost:8080/api/v1/userLesson/start-Lesson)
 
 
 - **Example in Postman**
@@ -338,16 +408,16 @@ This is a server-side API for an English learning application, built using Java 
      
 
 - **Delete User Lesson**
-  - `DELETE` [http://localhost:8080/api/v1/userLesson/{id}](http://localhost:8080/api/v1/userLesson/{id})
+  - `DELETE` [http://localhost:8080/api/v1/user-Lesson/{id}](http://localhost:8080/api/v1/user-Lesson/{id})
 
 - **Show User Lesson**
-  - `GET` [http://localhost:8080/api/v1/userLesson](http://localhost:8080/api/v1/userLesson)
+  - `GET` [http://localhost:8080/api/v1/user-Lesson](http://localhost:8080/api/v1/user-Lesson)
 
 - **Show User Lesson by user id**
-  - `GET` [http://localhost:8080/api/v1/userLesson/{id}](http://localhost:8080/api/v1/userLesson/{id})
+  - `GET` [http://localhost:8080/api/v1/user-Lesson/{id}](http://localhost:8080/api/v1/user-Lesson/{id})
 
 - **Get Current userLesson**
-    - `GET` [http://localhost:8080/api/v1/userLesson/me](http://localhost:8080/api/v1/userLesson/me)
+    - `GET` [http://localhost:8080/api/v1/user-Lesson/me](http://localhost:8080/api/v1/user-Lesson/me)
 
 
     - **Headers**
@@ -388,7 +458,7 @@ This is a server-side API for an English learning application, built using Java 
       ]
       ```
 - **Update userLesson Process**
-    - `PUT` [http://localhost:8080/api/v1/userLesson/{id}](http://localhost:8080/api/v1/userLesson/{id})
+    - `PUT` [http://localhost:8080/api/v1/user-Lesson/{id}](http://localhost:8080/api/v1/user-Lesson/{id})
 - **Example in Postman**
     1. In the **Body** section, select `raw` and set the format to `JSON`.
     2. Create the JSON body like this:
