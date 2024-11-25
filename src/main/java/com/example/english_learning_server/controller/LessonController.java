@@ -77,9 +77,12 @@ public class LessonController {
     }
 
     @GetMapping("/user")
-    public ResponseEntity<List<UserLessonDTO>> getUserLessons(@RequestHeader("Authorization") String token) {
+    public ResponseEntity<List<LessonDTO>> getLessonsForCurrentUser(
+            @RequestHeader("Authorization") String token,
+            @RequestParam("courseId") Integer courseId) {
         // Gọi phương thức từ LessonService để lấy danh sách bài học cho người dùng hiện tại
-        List<UserLessonDTO> userLessons = lessonService.getUserLessonsForCurrentUser();
-        return new ResponseEntity<>(userLessons, HttpStatus.OK);
+        List<LessonDTO> lessons = lessonService.getLessonsByCourseForCurrentUser(courseId);
+
+        return ResponseEntity.ok(lessons); // Trả về danh sách bài học với HTTP status 200
     }
 }

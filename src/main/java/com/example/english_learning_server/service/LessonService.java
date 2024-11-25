@@ -79,7 +79,7 @@ public class LessonService {
         return lessonRepository.findByLevel(level);
     }
 
-    public List<UserLessonDTO> getUserLessonsForCurrentUser() {
+    public List<LessonDTO> getLessonsByCourseForCurrentUser(Integer courseId) {
         // Lấy email của user từ SecurityContext
         String userEmail = null;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -94,28 +94,25 @@ public class LessonService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         // Lấy danh sách bài học từ UserLessonRepository
-        List<Object[]> results = userLessonRepository.findLessonsByUserId(user.getId());
+        List<Object[]> results = userLessonRepository.findLessonsByCourseAndUser(courseId, user.getId());
 
-        // Chuyển đổi kết quả thành UserLessonDTO
-        List<UserLessonDTO> userLessons = results.stream()
+        // Chuyển đổi kết quả thành LessonDTO
+        List<LessonDTO> lessons = results.stream()
                 .map(result -> {
-                    UserLessonDTO dto = new UserLessonDTO();
-                    dto.setLessonId((Integer) result[0]);
-                    dto.setLessonName((String) result[1]);
-                    dto.setContent((String) result[2]);
-                    dto.setAttachments((String) result[3]);
-                    dto.setLevel((Integer) result[4]);
-                    dto.setCourseId((Integer) result[5]);
-
-                    // Kiểm tra nếu progress là null thì gán là 0
-                    dto.setProgress(result[6] != null ? (Double) result[6] : 0.0);  // Nếu progress null thì gán 0.0
-
-                    return dto;
+                    LessonDTO lessonDTO = new LessonDTO();
+                    lessonDTO.setLessonId(((Integer) result[0]));
+                    lessonDTO.setLessonName((String) result[1]);
+                    lessonDTO.setContent((String) result[2]);
+                    lessonDTO.setAttachments((String) result[3]);
+                    lessonDTO.setLevel((Integer) result[4]);
+                    lessonDTO.setCourseId(((Integer) result[5]));
+                    lessonDTO.setProgress(result[6] != null ? (Double) result[6] : 0.0); // Gán 0.0 nếu progress null
+                    return lessonDTO;
                 })
-                .sorted(Comparator.comparing(UserLessonDTO::getLevel))  // Sắp xếp theo level
+                .sorted(Comparator.comparing(LessonDTO::getLevel)) // Sắp xếp theo level
                 .collect(Collectors.toList());
 
-        return userLessons;
+        return lessons;
     }
 
 
