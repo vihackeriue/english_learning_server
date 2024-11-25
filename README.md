@@ -6,9 +6,9 @@ This is a server-side API for an English learning application, built using Java 
 ### Key Technologies
 - **Java**: The primary language used for building the API.
 - **Spring Framework**:
-  - **Spring Boot**: For easy configuration and setup of the application.
-  - **Spring Security**: To handle authentication and authorization.
-  - **Spring MVC**: For building RESTful APIs.
+- **Spring Boot**: For easy configuration and setup of the application.
+- **Spring Security**: To handle authentication and authorization.
+- **Spring MVC**: For building RESTful APIs.
 
 ### Additional Features
 - **Cloudinary**: Used to store and manage images.
@@ -156,9 +156,6 @@ This is a server-side API for an English learning application, built using Java 
     2. Create the JSON body like this:
     3. similar `post`
 
-
-- **Delete Course**
-  - `DELETE` [http://localhost:8080/api/v1/courses/{id}](http://localhost:8080/api/v1/courses/{id})
 
 - **Show Course List**
   - `GET` [http://localhost:8080/api/v1/courses](http://localhost:8080/api/v1/courses)
@@ -331,7 +328,7 @@ This is a server-side API for an English learning application, built using Java 
 
 ### UserCourse APIs
 - **Add UserCourse**
-  - `POST` [http://localhost:8080/api/v1/user-Courses/enroll](http://localhost:8080/api/v1/user-Courses/enroll)
+  - `POST` [http://localhost:8080/api/v1/user-Courses/enroll](http://localhost:8080/api/v1/user-courses/enroll)
 
 
 - **Example in Postman**
@@ -348,17 +345,17 @@ This is a server-side API for an English learning application, built using Java 
        ```
 
 - **Delete UserCourse**
-  - `DELETE` [http://localhost:8080/api/v1/user-Courses/{id}](http://localhost:8080/api/v1/user-Courses/{id})
+  - `DELETE` [http://localhost:8080/api/v1/user-Courses/{id}](http://localhost:8080/api/v1/user-courses/{id})
 
 - **Show Lesson UserCourse**
-  - `GET` [http://localhost:8080/api/v1/user-Courses](http://localhost:8080/api/v1/user-Courses)
+  - `GET` [http://localhost:8080/api/v1/user-Courses](http://localhost:8080/api/v1/user-courses)
 
 - **Show UserCourse by ID**
-  - `GET` [http://localhost:8080/api/v1/user-Courses/{id}](http://localhost:8080/api/v1/user-Courses/{id})
+  - `GET` [http://localhost:8080/api/v1/user-Courses/{id}](http://localhost:8080/api/v1/user-courses/{id})
 
 
 - **Get Current userCourses by access-token**
-    - `GET` [http://localhost:8080/api/v1/user-Courses/me](http://localhost:8080/api/v1/user-Courses/me)
+    - `GET` [http://localhost:8080/api/v1/user-Courses/me](http://localhost:8080/api/v1/user-courses/me)
 
 
     - **Headers**
@@ -401,7 +398,7 @@ This is a server-side API for an English learning application, built using Java 
 
   **Add or Update User Lesson**
 - **Method**: `POST`
-- **Endpoint**: [http://localhost:8080/api/v1/user-Lesson/start-or-update-Lesson](http://localhost:8080/api/v1/user-Lesson/start-or-update-Lesson)
+- **Endpoint**: [http://localhost:8080/api/v1/user-lesson/start-or-update-Lesson](http://localhost:8080/api/v1/user-lesson/start-or-update-Lesson)
 
   **Description**
 
@@ -427,13 +424,13 @@ This is a server-side API for an English learning application, built using Java 
     ```  
 
 - **Delete User Lesson**
-  - `DELETE` [http://localhost:8080/api/v1/user-Lesson/{id}](http://localhost:8080/api/v1/user-Lesson/{id})
+  - `DELETE` [http://localhost:8080/api/v1/user-lesson/{id}](http://localhost:8080/api/v1/user-lesson/{id})
 
 - **Show all User Lesson**
   - `GET` [http://localhost:8080/api/v1/user-Lesson](http://localhost:8080/api/v1/user-Lesson)
 
 - **Get all Current userLesson by access-token**
-    - `GET` [http://localhost:8080/api/v1/user-Lesson/user](http://localhost:8080/api/v1/user-Lesson/user)
+    - `GET` [http://localhost:8080/api/v1/user-lesson/user](http://localhost:8080/api/v1/user-lesson/user)
 
 
     - **Headers**
