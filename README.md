@@ -203,6 +203,8 @@ This is a server-side API for an English learning application, built using Java 
     -  | Key            | Value             | Description                       |
     -  |----------------|-------------------|-----------------------------------|
     -  | Authorization  | Bearer {JWT}      | JWT access token from login       |
+ 
+    -  use Params as key : courseId and value : {id of course}
 
     - **Response Example**
       ```json
@@ -289,32 +291,32 @@ This is a server-side API for an English learning application, built using Java 
 
     - **Response Example**
       ```json
-    [
-    {
-    "id": 2,
-    "studentCode": 123,
-    "role": "USER",
-    "status": 1,
-    "courseId": 1,
-    "courseName": "test 1",
-    "courseCode": ".",
-    "statusCourse": 1,
-    "maxQuantity": 40,
-    "image": "https://example.com/image.png"
-    },
-    {
-    "id": 4,
-    "studentCode": 124,
-    "role": "USER",
-    "status": 1,
-    "courseId": 2,
-    "courseName": "test 2",
-    "courseCode": ".",
-    "statusCourse": 1,
-    "maxQuantity": 40,
-    "image": "https://example.com/image.png"
-    }
-    ]
+      [
+        {
+        "id": 2,
+        "studentCode": 123,
+        "role": "USER",
+        "status": 1,
+        "courseId": 1,
+        "courseName": "test 1",
+        "courseCode": ".",
+        "statusCourse": 1,
+        "maxQuantity": 40,
+        "image": "https://example.com/image.png"
+        },
+        {
+        "id": 4,
+        "studentCode": 124,
+        "role": "USER",
+        "status": 1,
+        "courseId": 2,
+        "courseName": "test 2",
+        "courseCode": ".",
+        "statusCourse": 1,
+        "maxQuantity": 40,
+        "image": "https://example.com/image.png"
+        }
+      ]
       ```
 
 
