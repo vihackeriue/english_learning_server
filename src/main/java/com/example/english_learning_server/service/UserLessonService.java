@@ -102,7 +102,8 @@ public class UserLessonService {
 
 
     // bắt đầu một bài học
-    public UserLesson startLesson(Integer userId, Integer courseId, Integer lessonId) {
+// bắt đầu một bài học
+    public UserLesson startLesson(Integer userId, Integer courseId, Integer lessonId, Double progress) {
         // Tìm User, Course và Lesson theo ID
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         Course course = courseRepository.findById(courseId).orElseThrow(() -> new RuntimeException("Course not found"));
@@ -113,12 +114,13 @@ public class UserLessonService {
         userLesson.setUser(user);
         userLesson.setCourse(course);
         userLesson.setLesson(lesson);
-        userLesson.setProgress(1.0); // Trạng thái tiến trình ban đầu
+        userLesson.setProgress(progress); // Dùng tham số progress truyền vào
         userLesson.setStatus(1); // Trạng thái khóa học mở (có thể là 1 cho "đang học")
 
         // Lưu vào bảng UserLesson
         return userLessonRepository.save(userLesson);
     }
+
 
 
     // Cập nhật UserLesson
@@ -160,7 +162,7 @@ public class UserLessonService {
             return userLessonRepository.save(userLesson);
         } else {
             // Nếu chưa có UserLesson, tạo mới
-            return startLesson(userId, courseId, lessonId); // Gọi lại phương thức startLesson để tạo mới UserLesson
+            return startLesson(userId, courseId, lessonId, progress); // Gọi lại phương thức startLesson để tạo mới UserLesson
         }
     }
 

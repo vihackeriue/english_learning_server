@@ -83,7 +83,7 @@ public class UserLessonController {
         // Lấy các tham số khác từ body JSON
         Integer courseId = (Integer) request.get("courseId");
         Integer lessonId = (Integer) request.get("lessonId");
-        Double progress = ((Number) request.get("progress")).doubleValue(); // Tiến trình
+        Double progress = request.get("progress") != null ? ((Number) request.get("progress")).doubleValue() : 1.0; // Nếu không có progress, gán mặc định 1.0
 
         // Kiểm tra xem người dùng đã có UserLesson cho bài học này chưa
         List<UserLesson> userLessons = userLessonService.getUserLessonsByUserId(userId);
@@ -99,10 +99,11 @@ public class UserLessonController {
             return ResponseEntity.ok(updatedUserLesson); // Trả về bài học đã được cập nhật
         } else {
             // Nếu UserLesson chưa tồn tại, tạo mới một UserLesson
-            UserLesson userLesson = userLessonService.startLesson(userId, courseId, lessonId);
+            UserLesson userLesson = userLessonService.startLesson(userId, courseId, lessonId, progress);
             return ResponseEntity.ok(userLesson); // Trả về bài học mới được tạo
         }
     }
+
 
 
 
