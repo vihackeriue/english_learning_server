@@ -328,11 +328,11 @@ This is a server-side API for an English learning application, built using Java 
 
 ### UserCourse APIs
 - **Add UserCourse**
-<<<<<<< HEAD
+
     - `POST` [http://localhost:8080/api/v1/user-courses/enroll](http://localhost:8080/api/v1/user-courses/enroll)
 =======
-  - `POST` [http://localhost:8080/api/v1/user-Courses/enroll](http://localhost:8080/api/v1/user-courses/enroll)
->>>>>>> 7608b8d1c4b08e1a9fde45eb4cf97ac528235233
+  - `POST` [http://localhost:8080/api/v1/user-courses/enroll](http://localhost:8080/api/v1/user-courses/enroll)
+
 
 
 - **Example in Postman**
@@ -349,7 +349,7 @@ This is a server-side API for an English learning application, built using Java 
        ```
 
 - **Delete UserCourse**
-<<<<<<< HEAD
+
     - `DELETE` [http://localhost:8080/api/v1/user-courses/{id}](http://localhost:8080/api/v1/user-courses/{id})
 
 - **Show Lesson UserCourse**
@@ -362,17 +362,17 @@ This is a server-side API for an English learning application, built using Java 
 - **Get Current userCourses by access-token**
     - `GET` [http://localhost:8080/api/v1/user-courses/me](http://localhost:8080/api/v1/user-courses/me)
 =======
-  - `DELETE` [http://localhost:8080/api/v1/user-Courses/{id}](http://localhost:8080/api/v1/user-courses/{id})
+  - `DELETE` [http://localhost:8080/api/v1/user-courses/{id}](http://localhost:8080/api/v1/user-courses/{id})
 
 - **Show Lesson UserCourse**
-  - `GET` [http://localhost:8080/api/v1/user-Courses](http://localhost:8080/api/v1/user-courses)
+  - `GET` [http://localhost:8080/api/v1/user-courses](http://localhost:8080/api/v1/user-courses)
 
 - **Show UserCourse by ID**
-  - `GET` [http://localhost:8080/api/v1/user-Courses/{id}](http://localhost:8080/api/v1/user-courses/{id})
+  - `GET` [http://localhost:8080/api/v1/user-courses/{id}](http://localhost:8080/api/v1/user-courses/{id})
 
 
 - **Get Current userCourses by access-token**
-    - `GET` [http://localhost:8080/api/v1/user-Courses/me](http://localhost:8080/api/v1/user-courses/me)
+    - `GET` [http://localhost:8080/api/v1/user-courses/me](http://localhost:8080/api/v1/user-courses/me)
 >>>>>>> 7608b8d1c4b08e1a9fde45eb4cf97ac528235233
 
 
@@ -416,7 +416,7 @@ This is a server-side API for an English learning application, built using Java 
 
 **Add or Update User Lesson**
 - **Method**: `POST`
-- **Endpoint**: [http://localhost:8080/api/v1/user-lesson/start-or-update-Lesson](http://localhost:8080/api/v1/user-lesson/start-or-update-Lesson)
+- **Endpoint**: [http://localhost:8080/api/v1/user-lesson/start-or-update-lesson](http://localhost:8080/api/v1/user-lesson/start-or-update-lesson)
 
   **Description**
 
@@ -452,7 +452,7 @@ This is a server-side API for an English learning application, built using Java 
 >>>>>>> 7608b8d1c4b08e1a9fde45eb4cf97ac528235233
 
 - **Show all User Lesson**
-    - `GET` [http://localhost:8080/api/v1/user-Lesson](http://localhost:8080/api/v1/user-Lesson)
+    - `GET` [http://localhost:8080/api/v1/user-lesson](http://localhost:8080/api/v1/user-lesson)
 
 - **Get all Current userLesson by access-token**
     - `GET` [http://localhost:8080/api/v1/user-lesson/user](http://localhost:8080/api/v1/user-lesson/user)
