@@ -102,7 +102,6 @@ public class UserLessonService {
 
 
     // bắt đầu một bài học
-// bắt đầu một bài học
     public UserLesson startLesson(Integer userId, Integer courseId, Integer lessonId, Double progress) {
         // Tìm User, Course và Lesson theo ID
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
@@ -170,5 +169,25 @@ public class UserLessonService {
         return userRepository.findByEmail(email);
     }
 
+    // Phương thức lấy tiến trình của người dùng hiện tại
+    public double getProgressForCurrentUser(Integer courseId, Integer lessonId) {
+        // Lấy email của user từ SecurityContext
+        String userEmail = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            userEmail = ((UserDetails) principal).getUsername();
+        } else {
+            userEmail = principal.toString();
+        }
 
+        // Tìm user hiện tại trong database
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // Truy vấn tiến trình cho bài học (lesson) và khóa học (course) của user hiện tại
+        Optional<UserLesson> userLesson = userLessonRepository.findProgressByUserIdCourseIdLessonId(user.getId(), courseId, lessonId);
+
+        // Trả về tiến trình (progress), nếu không có thì trả về 0
+        return userLesson.map(UserLesson::getProgress).orElse(0.0);
+    }
 }

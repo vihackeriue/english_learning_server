@@ -46,4 +46,7 @@ public interface UserLessonRepository extends JpaRepository<UserLesson, Long> {
             l.level ASC
     """, nativeQuery = true)
     List<Object[]> findLessonsByCourseAndUser(@Param("courseId") Integer courseId, @Param("userId") Integer userId);
+
+    @Query("SELECT ul FROM UserLesson ul WHERE ul.user.id = :userId AND ul.course.courseId = :courseId AND ul.lesson.lessonId = :lessonId")
+    Optional<UserLesson> findProgressByUserIdCourseIdLessonId(@Param("userId") Integer userId, @Param("courseId") Integer courseId, @Param("lessonId") Integer lessonId);
 }

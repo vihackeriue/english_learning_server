@@ -104,7 +104,11 @@ public class UserLessonController {
         }
     }
 
-
-
+    // API lấy tiến trình (progress) của bài học cho người dùng hiện tại
+    @GetMapping("/progress")
+    public ResponseEntity<Double> getUserLessonProgress(@RequestParam Integer courseId, @RequestParam Integer lessonId) {
+        double progress = userLessonService.getProgressForCurrentUser(courseId, lessonId);
+        return new ResponseEntity<>(progress, HttpStatus.OK);
+    }
 
 }
