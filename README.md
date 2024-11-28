@@ -445,11 +445,8 @@ This is a server-side API for an English learning application, built using Java 
         -  | Authorization  | Bearer {JWT}      | JWT access token from login       |
 
 - **Delete User Lesson**
-<<<<<<< HEAD
+
     - `DELETE` [http://localhost:8080/api/v1/user-lesson/{id}](http://localhost:8080/api/v1/user-lesson/{id})
-=======
-  - `DELETE` [http://localhost:8080/api/v1/user-lesson/{id}](http://localhost:8080/api/v1/user-lesson/{id})
->>>>>>> 7608b8d1c4b08e1a9fde45eb4cf97ac528235233
 
 - **Show all User Lesson**
     - `GET` [http://localhost:8080/api/v1/user-lesson](http://localhost:8080/api/v1/user-lesson)
@@ -494,6 +491,23 @@ This is a server-side API for an English learning application, built using Java 
       "progress": "0%"
       }
       ]
+      ```
+
+- **Get progress of current user lesson by access-token**
+  - `GET` [http://localhost:8080/api/v1/user-lesson/progress](http://localhost:8080/api/v1/user-lesson/progress)
+
+
+    - **Headers**
+    -  | Key            | Value             | Description                       |
+    -  |----------------|-------------------|-----------------------------------|
+    -  | Authorization  | Bearer {JWT}      | JWT access token from login       |
+    
+    -  use Params as key : courseId and value : {id of course}
+    -  use Params as key : lessonId and value : {id of lesson}
+
+    - **Response Example**
+      ```json
+
       ```
 
 
@@ -612,6 +626,64 @@ This is a server-side API for an English learning application, built using Java 
         }
         ]
         ```
+
+
+### Test APIs
+
+- **Add Test**
+  - `POST` [http://localhost:8080/api/v1/tests](http://localhost:8080/api/v1/tests)
+
+- **Example in Postman**
+  1. In the **Body** section, select `raw` and set the format to `JSON`.
+  2. Create the JSON body like this:
+     ```json
+     {
+         "testName": "Sample Test",
+         "description": "This is a sample test",
+         "examTime": "01:30:00",
+         "examDate": "2024-12-01",
+         "type": "Quiz",
+         "maxNumberOfExams": "100",
+         "level": "Intermediate",
+         "passingScore": "60",
+         "status": 1,
+         "courseId": 1
+     }
+     ```
+
+---
+
+- **Update Test**
+  - `PUT` [http://localhost:8080/api/v1/tests/{id}](http://localhost:8080/api/v1/tests/{id})
+
+- **Example in Postman**
+  1. In the **Body** section, select `raw` and set the format to `JSON`.
+  2. Create the JSON body like this:
+     ```json
+     {
+         "testName": "Updated Test Name",
+         "description": "Updated description",
+         "examTime": "02:00:00",
+         "examDate": "2024-12-15",
+         "type": "Final Exam",
+         "maxNumberOfExams": "200",
+         "level": "Advanced",
+         "passingScore": "80",
+         "status": 1,
+         "courseId": 1
+     }
+     ```
+
+- **Delete Test**
+  - `DELETE` [http://localhost:8080/api/v1/tests/{testId}](http://localhost:8080/api/v1/tests/{testId})
+
+- **Show Test List**
+  - `GET` [http://localhost:8080/api/v1/tests](http://localhost:8080/api/v1/tests)
+
+- **Show Test by ID**
+  - `GET` [http://localhost:8080/api/v1/tests/{testId}](http://localhost:8080/api/v1/tests/{testId})
+
+
 
 ---
 
