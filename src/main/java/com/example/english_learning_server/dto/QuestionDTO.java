@@ -11,5 +11,6 @@ public class QuestionDTO {
     private String attachments;
     private String type;
     private String score;
+    private Integer testId;
     private List<AnswerOptionDTO> answerOptions;
 }

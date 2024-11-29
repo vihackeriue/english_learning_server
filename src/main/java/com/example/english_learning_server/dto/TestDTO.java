@@ -19,5 +19,4 @@ public class TestDTO {
     private String passingScore;
     private Integer status;
     private Integer courseId;
-    private List<QuestionDTO> questions;
 }

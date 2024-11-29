@@ -8,4 +8,6 @@ public class AnswerOptionDTO {
     private String correctAnswer;
     private String content;
     private String attachments;
+    // id question
+    private Integer id;
 }

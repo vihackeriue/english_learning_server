@@ -651,8 +651,6 @@ This is a server-side API for an English learning application, built using Java 
      }
      ```
 
----
-
 - **Update Test**
   - `PUT` [http://localhost:8080/api/v1/tests/{id}](http://localhost:8080/api/v1/tests/{id})
 
@@ -683,6 +681,88 @@ This is a server-side API for an English learning application, built using Java 
 - **Show Test by ID**
   - `GET` [http://localhost:8080/api/v1/tests/{testId}](http://localhost:8080/api/v1/tests/{testId})
 
+
+### Question APIs
+
+- **Add Question**
+  - `POST` [http://localhost:8080/api/v1/questions](http://localhost:8080/api/v1/questions)
+
+- **Example in Postman**
+  1. In the **Body** section, select `raw` and set the format to `JSON`.
+  2. Create the JSON body like this:
+     ```json
+     {
+      "content": "What is the capital of France?",
+      "attachments": null,
+      "type": "single-choice",
+      "score": "10",
+      "testId": 2
+     }
+     ```
+
+- **Update Question**
+  - `PUT` [http://localhost:8080/api/v1/questions/{id}](http://localhost:8080/api/v1/questions/{id})
+
+- **Example in Postman**
+  1. In the **Body** section, select `raw` and set the format to `JSON`.
+  2. Create the JSON body like this:
+     ```json
+     {
+      "content": "What is the capital of Germany?",
+      "attachments": null,
+      "type": "single-choice",
+      "score": "10",
+      "testId": 2
+     }
+     ```
+
+- **Delete Question**
+  - `DELETE` [http://localhost:8080/api/v1/questions/{id}](http://localhost:8080/api/v1/questions/{id})
+
+- **Show Test List**
+  - `GET` [http://localhost:8080/api/v1/questions](http://localhost:8080/api/v1/questions)
+
+- **Show Test by test ID**
+  - `GET` [http://localhost:8080/api/v1/questions/test/{testId}](http://localhost:8080/api/v1/questions/test/{testId})
+
+
+### Answer Question APIs
+
+- **Add Answer Question**
+  - `POST` [http://localhost:8080/api/v1/answer-options](http://localhost:8080/api/v1/answer-options)
+
+- **Example in Postman**
+  1. In the **Body** section, select `raw` and set the format to `JSON`.
+  2. Create the JSON body like this:
+     ```json
+     {
+      "correctAnswer": "0",
+      "content": "London",
+      "attachments": null,
+      "id": 3
+     }
+     ```
+
+- **Update Answer Question**
+  - `PUT` [http://localhost:8080/api/v1/answer-options/{id}](http://localhost:8080/api/v1/answer-options/{id})
+
+- **Example in Postman**
+  1. In the **Body** section, select `raw` and set the format to `JSON`.
+  2. Create the JSON body like this:
+     ```json
+     {
+      "content": "Tokyo"
+     }
+     ```
+
+- **Delete Answer Question**
+  - `DELETE` [http://localhost:8080/api/v1/answer-options/{id}](http://localhost:8080/api/v1/answer-options/{id})
+
+- **Show Test List**
+  - `GET` [http://localhost:8080/api/v1/answer-options](http://localhost:8080/api/v1/answer-options)
+
+- **Show Test by question ID**
+  - `GET` [http://localhost:8080/api/v1/answer-options/question/{questionID](http://localhost:8080/api/v1/answer-options/question/{questionID})
 
 
 ---
