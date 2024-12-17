@@ -36,6 +36,12 @@ public class TestController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/course/{courseId}")
+    public ResponseEntity<List<TestDTO>> getTestsByCourseId(@PathVariable Integer courseId) {
+        List<TestDTO> tests = testService.getTestsByCourseId(courseId);
+        return ResponseEntity.ok(tests);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<TestDTO> updateTest(@PathVariable Integer id, @RequestBody TestDTO testDTO) {
         TestDTO updatedTest = testService.updateTest(id, testDTO);

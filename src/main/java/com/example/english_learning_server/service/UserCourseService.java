@@ -32,22 +32,40 @@ public class UserCourseService {
     @Autowired
     private UserCourseMapper userCourseMapper;
 
-    public UserCourseDTO enrollInCourse(Integer userId, Integer courseId, Integer studentCode, Role role) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-        Course course = courseRepository.findById(courseId).orElseThrow(() -> new RuntimeException("Course not found"));
+    public UserCourseDTO enrollInCourse(Integer courseId, Integer studentCode, Role role) {
+        // Lấy email của user từ SecurityContext
+        String userEmail = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            userEmail = ((UserDetails) principal).getUsername();
+        } else {
+            userEmail = principal.toString();
+        }
 
+        // Tìm user hiện tại dựa trên email
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // Tìm course theo courseId
+        Course course = courseRepository.findById(courseId)
+                .orElseThrow(() -> new RuntimeException("Course not found"));
+
+        // Tạo UserCourse mới
         UserCourse userCourse = UserCourse.builder()
                 .user(user)
                 .course(course)
                 .studentCode(studentCode)
                 .role(role)
-                .status(1)
+                .status(1) // Đặt trạng thái mặc định
                 .build();
 
+        // Lưu UserCourse
         UserCourse savedUserCourse = userCourseRepository.save(userCourse);
 
-        return userCourseMapper.toDto(savedUserCourse);  // Trả về DTO
+        // Trả về DTO
+        return userCourseMapper.toDto(savedUserCourse);
     }
+
 
     public List<UserCourseDTO> getAllUserCourses() {
         List<UserCourse> userCourses = userCourseRepository.findAll();

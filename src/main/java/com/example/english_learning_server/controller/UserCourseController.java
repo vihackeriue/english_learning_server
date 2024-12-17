@@ -26,13 +26,14 @@ public class UserCourseController {
     // Đăng ký học khóa học
     @PostMapping("/enroll")
     public UserCourseDTO enrollInCourse(@RequestBody Map<String, Object> request) {
-        Integer userId = (Integer) request.get("userId");
         Integer courseId = (Integer) request.get("courseId");
         Integer studentCode = (Integer) request.get("studentCode");
         Role role = Role.valueOf((String) request.get("role")); // Chuyển đổi string sang enum
 
-        return userCourseService.enrollInCourse(userId, courseId, studentCode, role);
+        // Gọi service để đăng ký khóa học (không cần truyền userId nữa)
+        return userCourseService.enrollInCourse(courseId, studentCode, role);
     }
+
 
 
     // Lấy tất cả UserCourses

@@ -36,6 +36,13 @@ public class TestService {
         return test.map(testMapper::toDTO).orElse(null);
     }
 
+
+    // Phương thức mới để lấy các bài kiểm tra theo ID khóa học
+    public List<TestDTO> getTestsByCourseId(Integer courseId) {
+        List<Test> tests = testRepository.findByCourse_CourseId(courseId);
+        return tests.stream().map(testMapper::toDTO).collect(Collectors.toList());
+    }
+
     public TestDTO updateTest(Integer id, TestDTO testDTO) {
         Optional<Test> optionalTest = testRepository.findById(id);
         if (optionalTest.isPresent()) {

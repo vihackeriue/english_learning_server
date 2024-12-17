@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Data
@@ -29,24 +30,32 @@ public class UserTest {
     @JsonIgnore
     private Test test;
 
+
     private LocalTime examTimes;
+    private LocalDate date;
     private Integer status;
     private String score;
     private String answerAttachments;
+
+    @Column(name = "has_participated")
+    private Boolean hasParticipated;  // Cột mới để kiểm tra trạng thái tham gia bài test
+
 
     // Constructors, Getters, and Setters
 
     public UserTest() {
     }
 
-    public UserTest(Long id, User user, Test test, LocalTime examTimes, Integer status, String score, String answerAttachments) {
+    public UserTest(Long id, User user, Test test, LocalTime examTimes, LocalDate date, Integer status, String score, String answerAttachments, Boolean hasParticipated) {
         this.id = id;
         this.user = user;
         this.test = test;
         this.examTimes = examTimes;
+        this.date = date;
         this.status = status;
         this.score = score;
         this.answerAttachments = answerAttachments;
+        this.hasParticipated = hasParticipated;
     }
 
     public Long getId() {
@@ -81,6 +90,14 @@ public class UserTest {
         this.examTimes = examTimes;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     public Integer getStatus() {
         return status;
     }
@@ -103,5 +120,13 @@ public class UserTest {
 
     public void setAnswerAttachments(String answerAttachments) {
         this.answerAttachments = answerAttachments;
+    }
+
+    public Boolean getHasParticipated() {
+        return hasParticipated;
+    }
+
+    public void setHasParticipated(Boolean hasParticipated) {
+        this.hasParticipated = hasParticipated;
     }
 }

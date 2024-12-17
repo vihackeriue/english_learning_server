@@ -37,7 +37,8 @@ public class Test {
     @JsonIgnore
     private Course course;
 
-    @OneToMany(mappedBy = "test", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "test", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<UserTest> userTests = new ArrayList<>();
 
     @OneToMany(mappedBy = "test", cascade = CascadeType.ALL)

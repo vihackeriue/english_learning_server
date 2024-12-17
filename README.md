@@ -330,23 +330,30 @@ This is a server-side API for an English learning application, built using Java 
 - **Add UserCourse**
 
     - `POST` [http://localhost:8080/api/v1/user-courses/enroll](http://localhost:8080/api/v1/user-courses/enroll)
-=======
-  - `POST` [http://localhost:8080/api/v1/user-courses/enroll](http://localhost:8080/api/v1/user-courses/enroll)
+      
+  **Description**
 
+- This API allows you to start a new lesson for a user or update the progress of an existing lesson for a specific user in a particular course. It checks whether a `UserLesson` already exists for the specified `userId`, `courseId`, and `lessonId`. If it exists, it updates the progress, otherwise, it creates a new `UserLesson`.
 
+  **Request Body**
 
-- **Example in Postman**
-    1. In the **Body** section, select `raw` and set the format to `JSON`.
-    2. Create the JSON body like this:
-       ```json
-        {
-        "userId":2,
-        "courseId":7,
-        "studentCode":1233,
-        "role":"USER",
-        "status":"1"
-        }
-       ```
+- The body of the request must contain the following parameters:
+
+  **Example Request**
+    ```json
+    {
+      "courseId":2,
+      "studentCode":4512,
+      "role":"USER",
+      "status":"1"
+    }
+    ```  
+
+        - **Headers**
+        -  | Key            | Value             | Description                       |
+        -  |----------------|-------------------|-----------------------------------|
+        -  | Authorization  | Bearer {JWT}      | JWT access token from login       |
+
 
 - **Delete UserCourse**
 
@@ -681,6 +688,9 @@ This is a server-side API for an English learning application, built using Java 
 - **Show Test by ID**
   - `GET` [http://localhost:8080/api/v1/tests/{testId}](http://localhost:8080/api/v1/tests/{testId})
 
+- **Show Test by Courses ID**
+  - `GET` [http://localhost:8080/api/v1/tests/course/{courseId}](http://localhost:8080/api/v1/tests/course/{courseId})
+
 
 ### Question APIs
 
@@ -764,6 +774,33 @@ This is a server-side API for an English learning application, built using Java 
 - **Show Test by question ID**
   - `GET` [http://localhost:8080/api/v1/answer-options/question/{questionID](http://localhost:8080/api/v1/answer-options/question/{questionID})
 
+### UserTest APIs
+
+**Add User Test**
+- **Method**: `POST`
+- **Endpoint**: [http://localhost:8080/api/v1/user-test/save](http://localhost:8080/api/v1/user-test/save)
+
+  **Request Body**
+
+- The body of the request must contain the following parameters:
+
+
+  **Example Request**
+    ```json
+      {
+        "score":"5",
+        "status":1,
+        "testId":2,
+        "answerAttachments":"adasdad"
+      }
+    ```
+
+    ```  
+
+        - **Headers**
+        -  | Key            | Value             | Description                       |
+        -  |----------------|-------------------|-----------------------------------|
+        -  | Authorization  | Bearer {JWT}      | JWT access token from login       |
 
 ---
 
