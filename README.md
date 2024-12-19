@@ -380,7 +380,6 @@ This is a server-side API for an English learning application, built using Java 
 
 - **Get Current userCourses by access-token**
     - `GET` [http://localhost:8080/api/v1/user-courses/me](http://localhost:8080/api/v1/user-courses/me)
->>>>>>> 7608b8d1c4b08e1a9fde45eb4cf97ac528235233
 
 
     - **Headers**
@@ -647,8 +646,7 @@ This is a server-side API for an English learning application, built using Java 
      {
          "testName": "Sample Test",
          "description": "This is a sample test",
-         "examTime": "01:30:00",
-         "examDate": "2024-12-01",
+         "examTime": 30,
          "type": "Quiz",
          "maxNumberOfExams": "100",
          "level": "Intermediate",
@@ -668,8 +666,7 @@ This is a server-side API for an English learning application, built using Java 
      {
          "testName": "Updated Test Name",
          "description": "Updated description",
-         "examTime": "02:00:00",
-         "examDate": "2024-12-15",
+         "examTime": 30,
          "type": "Final Exam",
          "maxNumberOfExams": "200",
          "level": "Advanced",
@@ -786,22 +783,124 @@ This is a server-side API for an English learning application, built using Java 
 
 
   **Example Request**
-    ```json
+      ```json
       {
         "score":"5",
         "status":1,
         "testId":2,
         "answerAttachments":"adasdad"
       }
+      ```
+
     ```
-
-    ```  
-
         - **Headers**
         -  | Key            | Value             | Description                       |
         -  |----------------|-------------------|-----------------------------------|
         -  | Authorization  | Bearer {JWT}      | JWT access token from login       |
 
+
+- **Get Test and user test by access-token**
+  - `GET` [http://localhost:8080/api/v1/user-test/ranked-tests](http://localhost:8080/api/v1/user-test/ranked-tests)
+
+
+    - **Headers**
+    -  | Key            | Value             | Description                       |
+    -  |----------------|-------------------|-----------------------------------|
+    -  | Authorization  | Bearer {JWT}      | JWT access token from login       |
+ 
+    -  use Params as key : courseId and value : {id of course}
+
+    - **Response Example**
+      ```json
+      [
+      {
+        "testId": 1,
+        "testName": "Sample Test",
+        "description": "This is a sample test",
+        "examDate": "2024-12-01",
+        "examTime": 90,
+        "level": "Intermediate",
+        "maxNumberOfExams": "100",
+        "courseId": 1,
+        "type": "Quiz",
+        "score": "8.5",
+        "date": "2024-12-19",
+        "examTimes": "16:48:59.495000",
+        "status": 1
+      },
+      {
+        "testId": 2,
+        "testName": "Sample Test 2",
+        "description": "This is a sample test",
+        "examDate": "2024-12-01",
+        "examTime": 90,
+        "level": "Intermediate",
+        "maxNumberOfExams": "100",
+        "courseId": 1,
+        "type": "Quiz",
+        "score": "7.5",
+        "date": "2024-12-19",
+        "examTimes": "16:51:42.113000",
+        "status": 1
+      }
+      ]
+      ```
+
+- **Get All Test and user test by access-token**
+  - `GET` [http://localhost:8080/api/v1/user-test/ranked-tests-example](http://localhost:8080/api/v1/user-test/ranked-tests-example)
+
+
+    - **Headers**
+    -  | Key            | Value             | Description                       |
+    -  |----------------|-------------------|-----------------------------------|
+    -  | Authorization  | Bearer {JWT}      | JWT access token from login       |
+ 
+    -  use Params as key : courseId and value : {id of course}
+
+    - **Response Example**
+      ```json
+    [
+    {
+        "testId": 4,
+        "examTime": 90,
+        "level": "Intermediate",
+        "maxNumberOfExams": "100",
+        "userTestStatus": 1,
+        "testName": "Sample Test 2.2",
+        "type": "Quiz",
+        "courseId": 2,
+        "score": "5.5",
+        "date": "2024-12-19",
+        "examTimes": "16:33:17"
+    },
+    {
+        "testId": 3,
+        "examTime": 90,
+        "level": "Intermediate",
+        "maxNumberOfExams": "100",
+        "userTestStatus": 1,
+        "testName": "Sample Test 2.1",
+        "type": "Quiz",
+        "courseId": 2,
+        "score": "7",
+        "date": "2024-12-19",
+        "examTimes": "16:33:08"
+    },
+    {
+        "testId": 3,
+        "examTime": 90,
+        "level": "Intermediate",
+        "maxNumberOfExams": "100",
+        "userTestStatus": 1,
+        "testName": "Sample Test 2.1",
+        "type": "Quiz",
+        "courseId": 2,
+        "score": "5",
+        "date": "2024-12-19",
+        "examTimes": "16:32:48"
+    }
+    ]
+      ```
 ---
 
 ## Installation and Setup

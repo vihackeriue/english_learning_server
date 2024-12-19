@@ -3,15 +3,13 @@ package com.example.english_learning_server.dto;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.List;
 
 @Data
 public class TestDTO {
     private Integer testId;
     private String testName;
     private String description;
-    private LocalTime examTime;
+    private Integer examTime;  // Chuyển kiểu dữ liệu sang Integer
     private LocalDate examDate;
     private String type;
     private String maxNumberOfExams;

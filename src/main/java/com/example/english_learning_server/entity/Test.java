@@ -1,5 +1,6 @@
 package com.example.english_learning_server.entity;
 
+import com.example.english_learning_server.converter.LocalDateConverter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,7 +10,6 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +24,8 @@ public class Test {
 
     private String testName;
     private String description;
-    private LocalTime examTime;
+    private Integer examTime;  // Chuyển kiểu dữ liệu sang Integer
+    @Convert(converter = LocalDateConverter.class)
     private LocalDate examDate;
     private String type;
     private String maxNumberOfExams;
@@ -48,12 +49,10 @@ public class Test {
     @OneToMany(mappedBy = "test", cascade = CascadeType.ALL)
     private List<UserAnswer> userAnswers = new ArrayList<>();
 
-    // Getters and setters
-
     public Test() {
     }
 
-    public Test(Integer testId, String testName, String description, LocalTime examTime, LocalDate examDate, String type, String maxNumberOfExams, String level, String passingScore, Integer status, Course course, List<UserTest> userTests, List<Question> questions, List<UserAnswer> userAnswers) {
+    public Test(Integer testId, String testName, String description, Integer examTime, LocalDate examDate, String type, String maxNumberOfExams, String level, String passingScore, Integer status, Course course, List<UserTest> userTests, List<Question> questions, List<UserAnswer> userAnswers) {
         this.testId = testId;
         this.testName = testName;
         this.description = description;
@@ -69,6 +68,8 @@ public class Test {
         this.questions = questions;
         this.userAnswers = userAnswers;
     }
+
+// Getter và Setter đã cập nhật kiểu dữ liệu examTime
 
     public Integer getTestId() {
         return testId;
@@ -94,11 +95,11 @@ public class Test {
         this.description = description;
     }
 
-    public LocalTime getExamTime() {
+    public Integer getExamTime() {
         return examTime;
     }
 
-    public void setExamTime(LocalTime examTime) {
+    public void setExamTime(Integer examTime) {
         this.examTime = examTime;
     }
 

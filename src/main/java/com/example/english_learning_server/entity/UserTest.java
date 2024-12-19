@@ -1,5 +1,6 @@
 package com.example.english_learning_server.entity;
 
+import com.example.english_learning_server.converter.LocalDateConverter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,6 +33,7 @@ public class UserTest {
 
 
     private LocalTime examTimes;
+    @Convert(converter = LocalDateConverter.class)
     private LocalDate date;
     private Integer status;
     private String score;
